@@ -1,0 +1,163 @@
+<clones>
+<systeminfo processor="nicad6" system="volttron" granularity="functions" threshold="0%" minlines="5" maxlines="2500"/>
+<cloneinfo npcs="2905" npairs="53"/>
+<runinfo ncompares="83478" cputime="46"/>
+<classinfo nclasses="29"/>
+
+<class classid="1" nclones="3" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/deprecated/OpenEISHistorian/openeis/historian.py" startline="176" endline="186" pcid="78"></source>
+<source file="E:/Git/II/latest/volttron/services/core/MQTTHistorian/mqtt_historian/agent.py" startline="148" endline="155" pcid="864"></source>
+<source file="E:/Git/II/latest/volttron/services/contrib/InfluxdbHistorian/influx/historian.py" startline="379" endline="389" pcid="478"></source>
+</class>
+
+<class classid="2" nclones="2" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/examples/ListenerAgent/listener/agent.py" startline="118" endline="125" pcid="198"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/modbus_listener_agent.py" startline="149" endline="156" pcid="1020"></source>
+</class>
+
+<class classid="3" nclones="2" nlines="5" similarity="100">
+<source file="E:/Git/II/latest/volttron/examples/MarketAgents/AHUAgent/ahu/agent.py" startline="113" endline="118" pcid="201"></source>
+<source file="E:/Git/II/latest/volttron/examples/MarketAgents/VAVAgent/vav/agent.py" startline="127" endline="132" pcid="250"></source>
+</class>
+
+<class classid="4" nclones="2" nlines="7" similarity="100">
+<source file="E:/Git/II/latest/volttron/examples/StandAloneFileWatcher/standalonefilewatchpublisher.py" startline="63" endline="70" pcid="308"></source>
+<source file="E:/Git/II/latest/volttron/services/ops/FileWatchPublisher/filewatchpublisher/agent.py" startline="126" endline="133" pcid="1402"></source>
+</class>
+
+<class classid="5" nclones="3" nlines="9" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/contrib/MarketServiceAgent/tests/test_offer.py" startline="59" endline="67" pcid="559"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/base_market_agent/test_poly_line_factory.py" startline="94" endline="102" pcid="2594"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/base_market_agent/test_poly_line.py" startline="166" endline="174" pcid="2589"></source>
+</class>
+
+<class classid="6" nclones="2" nlines="9" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="83" endline="98" pcid="618"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="90" endline="106" pcid="804"></source>
+</class>
+
+<class classid="7" nclones="2" nlines="7" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="100" endline="112" pcid="620"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="108" endline="121" pcid="806"></source>
+</class>
+
+<class classid="8" nclones="2" nlines="9" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="114" endline="126" pcid="622"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="123" endline="136" pcid="808"></source>
+</class>
+
+<class classid="9" nclones="2" nlines="8" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="154" endline="163" pcid="624"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="165" endline="174" pcid="810"></source>
+</class>
+
+<class classid="10" nclones="2" nlines="34" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="314" endline="377" pcid="628"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="226" endline="289" pcid="812"></source>
+</class>
+
+<class classid="11" nclones="2" nlines="27" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="380" endline="436" pcid="629"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="292" endline="348" pcid="813"></source>
+</class>
+
+<class classid="12" nclones="2" nlines="26" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="439" endline="497" pcid="630"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="351" endline="410" pcid="814"></source>
+</class>
+
+<class classid="13" nclones="2" nlines="21" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/DataMover/tests/test_datamover.py" startline="500" endline="545" pcid="631"></source>
+<source file="E:/Git/II/latest/volttron/services/core/ForwardHistorian/tests/test_forward_historian.py" startline="413" endline="458" pcid="815"></source>
+</class>
+
+<class classid="14" nclones="2" nlines="34" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg.py" startline="49" endline="102" pcid="1048"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg_pow_10.py" startline="49" endline="102" pcid="1060"></source>
+</class>
+
+<class classid="15" nclones="3" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg.py" startline="172" endline="181" pcid="1056"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg_pow_10.py" startline="172" endline="181" pcid="1068"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_write_single_registers.py" startline="168" endline="178" pcid="1088"></source>
+</class>
+
+<class classid="16" nclones="3" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg.py" startline="203" endline="211" pcid="1059"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_write_single_registers.py" startline="206" endline="215" pcid="1092"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/platform_driver/interfaces/modbus_tk/tests/test_scale_reg_pow_10.py" startline="203" endline="211" pcid="1071"></source>
+</class>
+
+<class classid="17" nclones="2" nlines="7" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups.py" startline="78" endline="92" pcid="1177"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups_p2.py" startline="167" endline="181" pcid="1190"></source>
+</class>
+
+<class classid="18" nclones="3" nlines="21" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups.py" startline="124" endline="163" pcid="1178"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups_p2.py" startline="183" endline="222" pcid="1191"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_global_settings.py" startline="155" endline="194" pcid="1250"></source>
+</class>
+
+<class classid="19" nclones="3" nlines="11" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups.py" startline="164" endline="176" pcid="1179"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_device_groups_p2.py" startline="223" endline="235" pcid="1192"></source>
+<source file="E:/Git/II/latest/volttron/services/core/PlatformDriverAgent/tests/test_global_settings.py" startline="195" endline="207" pcid="1251"></source>
+</class>
+
+<class classid="20" nclones="2" nlines="5" similarity="100">
+<source file="E:/Git/II/latest/volttron/services/core/VolttronCentral/tests/test_platforms.py" startline="11" endline="17" pcid="1319"></source>
+<source file="E:/Git/II/latest/volttron/services/core/VolttronCentral/tests/test_vc.py" startline="62" endline="68" pcid="1323"></source>
+</class>
+
+<class classid="21" nclones="2" nlines="5" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/move_sqlite_files.py" startline="51" endline="59" pcid="2092"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/update_auth_file.py" startline="49" endline="57" pcid="2099"></source>
+</class>
+
+<class classid="22" nclones="4" nlines="5" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/move_sqlite_files.py" startline="105" endline="113" pcid="2095"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/upgrade_volttron.py" startline="63" endline="69" pcid="2107"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/rename_config_for_agent_isolation.py" startline="65" endline="72" pcid="2098"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/upgrade/update_auth_file.py" startline="156" endline="164" pcid="2105"></source>
+</class>
+
+<class classid="23" nclones="4" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttron/platform/vip/agent/subsystems/hello.py" startline="123" endline="128" pcid="2196"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/vip/agent/subsystems/peerlist.py" startline="173" endline="178" pcid="2203"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/vip/agent/subsystems/query.py" startline="92" endline="97" pcid="2211"></source>
+<source file="E:/Git/II/latest/volttron/volttron/platform/vip/agent/subsystems/ping.py" startline="100" endline="105" pcid="2207"></source>
+</class>
+
+<class classid="24" nclones="2" nlines="7" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/auth_tests/conftest.py" startline="1" endline="7" pcid="2487"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/auth_tests/test_auth_control.py" startline="174" endline="182" pcid="2497"></source>
+</class>
+
+<class classid="25" nclones="2" nlines="9" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/base_market_agent/test_poly_line.py" startline="155" endline="165" pcid="2588"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/platform/base_market_agent/test_poly_line_factory.py" startline="82" endline="92" pcid="2593"></source>
+</class>
+
+<class classid="26" nclones="3" nlines="7" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/services/historian/test_base_historian.py" startline="79" endline="88" pcid="2760"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/services/historian/test_base_historian.py" startline="119" endline="128" pcid="2765"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/services/historian/test_base_historian.py" startline="570" endline="577" pcid="2777"></source>
+</class>
+
+<class classid="27" nclones="2" nlines="9" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmq.py" startline="52" endline="62" pcid="2898"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmqsub.py" startline="51" endline="61" pcid="2902"></source>
+</class>
+
+<class classid="28" nclones="2" nlines="11" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmq.py" startline="63" endline="75" pcid="2899"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmqsub.py" startline="62" endline="74" pcid="2903"></source>
+</class>
+
+<class classid="29" nclones="2" nlines="6" similarity="100">
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmq.py" startline="76" endline="82" pcid="2900"></source>
+<source file="E:/Git/II/latest/volttron/volttrontesting/zmq/test_zmqsub.py" startline="75" endline="81" pcid="2904"></source>
+</class>
+
+</clones>

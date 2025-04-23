@@ -1,0 +1,4404 @@
+<html>
+<head>
+    <title>NiCad6 Clone Report</title>
+    <style type="text/css">
+        body {font-family:sans-serif;}
+        table {background-color:white; border:0px; padding:0px; border-spacing:4px; width:auto; margin-left:30px; margin-right:auto;}
+        td {background-color:rgba(192,212,238,0.8); border:0px; padding:8px; width:auto; vertical-align:top; border-radius:8px}
+        pre {background-color:white; padding:4px;}
+        a {color:darkblue;}
+    </style>
+</head>
+<body>
+<h2>NiCad6 Clone Report</h2>
+<table>
+<tr style="font-size:14pt">
+<td><b>System:</b> &nbsp; vorto</td>
+<td><b>Clone pairs:</b> &nbsp; 113</td>
+<td><b>Clone classes:</b> &nbsp; 90</td>
+</tr>
+<tr style="font-size:12pt">
+<td style="background-color:white">Clone type: &nbsp; 1</td>
+<td style="background-color:white">Granularity: &nbsp; functions</td>
+<td style="background-color:white">Max diff threshold: &nbsp; 0%</td>
+<td style="background-color:white">Clone size: &nbsp; 5 - 2500 lines</td>
+<td style="background-color:white">Total functions: &nbsp; 5013</td>
+</tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 1:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag294')" href="javascript:;">
+vorto/mapping-engine/demo/src/main/java/org/mycompany/Main.java: 30-45
+</a>
+<div class="mid" id="frag294" style="display:none"><pre>
+	public static void main(String[] args) throws Exception {
+		MappingEngine engine = MappingEngine
+				.createFromInputStream(FileUtils.openInputStream(new File("src/test/resources/mappingspec.json")));
+		Map&lt;String, Object&gt; data = new HashMap&lt;String, Object&gt;();
+		data.put("distance", "100m");
+		InfomodelValue result = engine.mapSource(data);
+		if (result.validate().isValid()) {
+			JsonObject dittoPayloadToUpdateAllFeatures = TwinPayloadFactory.toDittoProtocol(result, "org.eclipse.vorto", "deviceid-123");
+			System.out.println(gson.toJson(dittoPayloadToUpdateAllFeatures));
+			
+			JsonObject dittoPayloadToUpdateSingleFeature = TwinPayloadFactory.toDittoProtocol(result.get("distance"),"distance", "org.eclipse.vorto", "deviceid-123");
+			System.out.println(gson.toJson(dittoPayloadToUpdateSingleFeature));
+		} else {
+			System.err.println("Mapped data is not valid to Vorto Model");
+		}
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag542')" href="javascript:;">
+vorto/mapping-engine/mapping-engine-all/src/test/java/org/eclipse/vorto/service/mapping/Example.java: 30-47
+</a>
+<div class="mid" id="frag542" style="display:none"><pre>
+  public static void main(String[] args) throws Exception {
+    MappingEngine engine = MappingEngine.createFromInputStream(
+        FileUtils.openInputStream(new File("src/test/resources/mappingspec.json")));
+    Map&lt;String, Object&gt; data = new HashMap&lt;String, Object&gt;();
+    data.put("distance", "100m");
+    InfomodelValue result = engine.mapSource(data);
+    if (result.validate().isValid()) {
+      JsonObject dittoPayloadToUpdateAllFeatures =
+          TwinPayloadFactory.toDittoProtocol(result, "org.eclipse.vorto", "deviceid-123");
+      System.out.println(gson.toJson(dittoPayloadToUpdateAllFeatures));
+
+      JsonObject dittoPayloadToUpdateSingleFeature = TwinPayloadFactory
+          .toDittoProtocol(result.get("distance"), "distance", "org.eclipse.vorto", "deviceid-123");
+      System.out.println(gson.toJson(dittoPayloadToUpdateSingleFeature));
+    } else {
+      System.err.println("Mapped data is not valid to Vorto Model");
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 2:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag305')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-binary/src/test/java/org/eclipse/vorto/mapping/engine/converter/binary/SpecGattConverter.java: 30-46
+</a>
+<div class="mid" id="frag305" style="display:none"><pre>
+  protected void createModel() {
+    FunctionblockModel buttonModel = new FunctionblockModel(
+        ModelId.fromPrettyFormat("demo.fb:PushButton:1.0.0"));
+    ModelProperty digitalInputStateProperty = new ModelProperty();
+    digitalInputStateProperty.setMandatory(true);
+    digitalInputStateProperty.setName("sensor_value");
+    digitalInputStateProperty.setType(PrimitiveType.STRING);
+
+    digitalInputStateProperty.setTargetPlatformKey("iotbutton");
+
+    digitalInputStateProperty.addStereotype(Stereotype.createWithXpath(
+        "button:convertSensorValue(vorto_conversion1:byteArrayToInt(characteristics[@uuid='23-D1-13-EF-5F-78-23-15-DE-EF-12-12-0D-F0-00-00']/data, 3, 0, 0, 3))"));
+
+    buttonModel.setStatusProperties(Arrays.asList(new ModelProperty[] {digitalInputStateProperty}));
+
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("button",buttonModel).build());
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag346')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecGattConverter.java: 30-46
+</a>
+<div class="mid" id="frag346" style="display:none"><pre>
+  protected void createModel() {
+    FunctionblockModel buttonModel = new FunctionblockModel(
+        ModelId.fromPrettyFormat("demo.fb:PushButton:1.0.0"));
+    ModelProperty digitalInputStateProperty = new ModelProperty();
+    digitalInputStateProperty.setMandatory(true);
+    digitalInputStateProperty.setName("sensor_value");
+    digitalInputStateProperty.setType(PrimitiveType.STRING);
+
+    digitalInputStateProperty.setTargetPlatformKey("iotbutton");
+
+    digitalInputStateProperty.addStereotype(Stereotype.createWithXpath(
+        "button:convertSensorValue(vorto_conversion1:byteArrayToInt(characteristics[@uuid='23-D1-13-EF-5F-78-23-15-DE-EF-12-12-0D-F0-00-00']/data, 3, 0, 0, 3))"));
+
+    buttonModel.setStatusProperties(Arrays.asList(new ModelProperty[] {digitalInputStateProperty}));
+
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("button",buttonModel).build());
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 3:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag306')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-binary/src/test/java/org/eclipse/vorto/mapping/engine/converter/binary/SpecGattConverter.java: 49-56
+</a>
+<div class="mid" id="frag306" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertSensorValue",
+        "function convertSensorValue(value) { return value*0.01; }"));
+    library.addFunctions(evaluator.getFunctions());
+    return library;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag347')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecGattConverter.java: 49-56
+</a>
+<div class="mid" id="frag347" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertSensorValue",
+        "function convertSensorValue(value) { return value*0.01; }"));
+    library.addFunctions(evaluator.getFunctions());
+    return library;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 4:</b> &nbsp; 3 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag351')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConfigMapping.java: 30-39
+</a>
+<div class="mid" id="frag351" style="display:none"><pre>
+  protected void createModel() {
+    
+    FunctionblockModel buttonModel = createButtonFb();
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("button",buttonModel).build());
+    
+    FunctionblockModel voltageModel = createVoltageFb();
+    
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("voltage",voltageModel).build());
+
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag359')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithCustomFunction.java: 30-37
+</a>
+<div class="mid" id="frag359" style="display:none"><pre>
+  protected void createModel() {
+    FunctionblockModel buttonModel = createButtonFb();
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("button",buttonModel).build());
+    
+    FunctionblockModel voltageModel = createVoltageFb();
+    
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("voltage",voltageModel).build());
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag355')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConstraintConfigMapping.java: 32-39
+</a>
+<div class="mid" id="frag355" style="display:none"><pre>
+  protected void createModel() {
+    FunctionblockModel buttonModel = createButtonFb();
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("button",buttonModel).build());
+    
+    FunctionblockModel voltageModel = createVoltageFb();
+    
+    infomodel.getFunctionblocks().add(ModelProperty.Builder("voltage",voltageModel).build());
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 5:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag352')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConfigMapping.java: 41-67
+</a>
+<div class="mid" id="frag352" style="display:none"><pre>
+  private FunctionblockModel createButtonFb() {
+    FunctionblockModel buttonModel = new FunctionblockModel(
+        ModelId.fromPrettyFormat("demo.fb:PushButton:1.0.0"));
+    ModelProperty digitalInputStateProperty = new ModelProperty();
+    digitalInputStateProperty.setMandatory(true);
+    digitalInputStateProperty.setName("digital_input_state");
+    digitalInputStateProperty.setType(PrimitiveType.BOOLEAN);
+
+    digitalInputStateProperty.setTargetPlatformKey("iotbutton");
+
+    digitalInputStateProperty
+        .addStereotype(Stereotype.createWithXpath("boolean:toBoolean(\"true\")"));
+
+    ModelProperty digitalInputCount = new ModelProperty();
+    digitalInputCount.setMandatory(true);
+    digitalInputCount.setName("digital_input_count");
+    digitalInputCount.setType(PrimitiveType.INT);
+
+    digitalInputCount.setTargetPlatformKey("iotbutton");
+    digitalInputCount
+        .addStereotype(Stereotype.createWithXpath("button:convertClickType(clickType)"));
+
+    buttonModel.setConfigurationProperties(
+        Arrays.asList(new ModelProperty[] {digitalInputStateProperty, digitalInputCount}));
+
+    return buttonModel;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag356')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConstraintConfigMapping.java: 41-67
+</a>
+<div class="mid" id="frag356" style="display:none"><pre>
+  private FunctionblockModel createButtonFb() {
+    FunctionblockModel buttonModel = new FunctionblockModel(
+        ModelId.fromPrettyFormat("demo.fb:PushButton:1.0.0"));
+    ModelProperty digitalInputStateProperty = new ModelProperty();
+    digitalInputStateProperty.setMandatory(true);
+    digitalInputStateProperty.setName("digital_input_state");
+    digitalInputStateProperty.setType(PrimitiveType.BOOLEAN);
+
+    digitalInputStateProperty.setTargetPlatformKey("iotbutton");
+
+    digitalInputStateProperty
+        .addStereotype(Stereotype.createWithXpath("boolean:toBoolean(\"true\")"));
+
+    ModelProperty digitalInputCount = new ModelProperty();
+    digitalInputCount.setMandatory(true);
+    digitalInputCount.setName("digital_input_count");
+    digitalInputCount.setType(PrimitiveType.INT);
+
+    digitalInputCount.setTargetPlatformKey("iotbutton");
+    digitalInputCount
+        .addStereotype(Stereotype.createWithXpath("button:convertClickType(clickType)"));
+
+    buttonModel.setConfigurationProperties(
+        Arrays.asList(new ModelProperty[] {digitalInputStateProperty, digitalInputCount}));
+
+    return buttonModel;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 6:</b> &nbsp; 4 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag354')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConfigMapping.java: 98-106
+</a>
+<div class="mid" id="frag354" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertClickType",
+        "function convertClickType(clickType) {if (clickType === 'SINGLE') return 1; else if (clickType === 'DOUBLE') return 2; else return 99;}"));
+    library.addFunctions(evaluator.getFunctions());
+
+    return library;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag358')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithConstraintConfigMapping.java: 99-107
+</a>
+<div class="mid" id="frag358" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertClickType",
+        "function convertClickType(clickType) {if (clickType === 'SINGLE') return 1; else if (clickType === 'DOUBLE') return 2; else return 99;}"));
+    library.addFunctions(evaluator.getFunctions());
+
+    return library;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag370')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithNestedEntityAndCustomFunction.java: 45-53
+</a>
+<div class="mid" id="frag370" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertClickType",
+        "function convertClickType(clickType) {if (clickType === 'SINGLE') return 1; else if (clickType === 'DOUBLE') return 2; else return 99;}"));
+    library.addFunctions(evaluator.getFunctions());
+
+    return library;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag362')" href="javascript:;">
+vorto/mapping-engine/mapping-converter-javascript/src/test/java/org/eclipse/vorto/mapping/engine/converter/javascript/SpecWithCustomFunction.java: 95-103
+</a>
+<div class="mid" id="frag362" style="display:none"><pre>
+  public FunctionLibrary getScriptFunctions(IScriptEvalProvider evalProvider) {
+    FunctionLibrary library = new FunctionLibrary();
+    IScriptEvaluator evaluator = evalProvider.createEvaluator("button");
+    evaluator.addScriptFunction(new ScriptClassFunction("convertClickType",
+        "function convertClickType(clickType) {if (clickType === 'SINGLE') return 1; else if (clickType === 'DOUBLE') return 2; else return 99;}"));
+    library.addFunctions(evaluator.getFunctions());
+
+    return library;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 7:</b> &nbsp; 3 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag465')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/model/spec/MappingSpecBuilder.java: 57-64
+</a>
+<div class="mid" id="frag465" style="display:none"><pre>
+        public IPropertyAttribute deserialize(JsonElement jsonElement, Type type,
+            JsonDeserializationContext context) throws JsonParseException {
+          if (jsonElement.getAsJsonObject().get("value").isJsonPrimitive()) {
+            return context.deserialize(jsonElement, BooleanAttributeProperty.class);
+          } else {
+            return context.deserialize(jsonElement, EnumAttributeProperty.class);
+          }
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4324')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/api/impl/ImplementationBase.java: 57-64
+</a>
+<div class="mid" id="frag4324" style="display:none"><pre>
+				public IPropertyAttribute deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context)
+						throws JsonParseException {
+					if (jsonElement.getAsJsonObject().get("value").isJsonPrimitive()) {
+						return context.deserialize(jsonElement, BooleanAttributeProperty.class);
+					} else {
+						return context.deserialize(jsonElement, EnumAttributeProperty.class);
+					}
+				}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4429')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/impl/ImplementationBase.java: 76-83
+</a>
+<div class="mid" id="frag4429" style="display:none"><pre>
+                public IPropertyAttribute deserialize(JsonElement jsonElement, Type type,
+                        JsonDeserializationContext context) throws JsonParseException {
+                    if (jsonElement.getAsJsonObject().get("value").isJsonPrimitive()) {
+                        return context.deserialize(jsonElement, BooleanAttributeProperty.class);
+                    } else {
+                        return context.deserialize(jsonElement, EnumAttributeProperty.class);
+                    }
+                }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 8:</b> &nbsp; 2 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag487')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/twin/TwinPayloadFactory.java: 44-59
+</a>
+<div class="mid" id="frag487" style="display:none"><pre>
+  public static JsonObject toDittoProtocol(InfomodelValue infomodelData, String dittoNamespace,
+      String dittoIdSuffix) {
+    Map&lt;String, Object&gt; dittoPayload = new HashMap&lt;String, Object&gt;();
+    dittoPayload.put("topic",
+        dittoNamespace + "/" + dittoIdSuffix + "/things/twin/commands/modify");
+    dittoPayload.put("headers", createHeader());
+    dittoPayload.put("path", "/features");
+
+    Map&lt;String, Object&gt; newFeatures = new HashMap&lt;String, Object&gt;();
+    for (String infomodelProperty : infomodelData.getProperties().keySet()) {
+      newFeatures.put(infomodelProperty, createFeature(infomodelData.get(infomodelProperty)));
+
+    }
+    dittoPayload.put("value", newFeatures);
+    return gson.toJsonTree(dittoPayload).getAsJsonObject();
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag590')" href="javascript:;">
+vorto/mapping-engine/mapping-targetplatform/mapping-targetplatform-ditto/src/main/java/org/eclipse/vorto/mapping/targetplatform/ditto/TwinPayloadFactory.java: 83-98
+</a>
+<div class="mid" id="frag590" style="display:none"><pre>
+  public static JsonObject toDittoProtocol(InfomodelValue infomodelData, String dittoNamespace,
+      String dittoIdSuffix) {
+    Map&lt;String, Object&gt; dittoPayload = new HashMap&lt;String, Object&gt;();
+    dittoPayload.put("topic",
+        dittoNamespace + "/" + dittoIdSuffix + "/things/twin/commands/modify");
+    dittoPayload.put("headers", createHeader());
+    dittoPayload.put("path", "/features");
+
+    Map&lt;String, Object&gt; newFeatures = new HashMap&lt;String, Object&gt;();
+    for (String infomodelProperty : infomodelData.getProperties().keySet()) {
+      newFeatures.put(infomodelProperty, createFeature(infomodelData.get(infomodelProperty)));
+
+    }
+    dittoPayload.put("value", newFeatures);
+    return gson.toJsonTree(dittoPayload).getAsJsonObject();
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 9:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag488')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/twin/TwinPayloadFactory.java: 61-66
+</a>
+<div class="mid" id="frag488" style="display:none"><pre>
+  private static Object createFeature(FunctionblockValue fbData) {
+    Map&lt;String, Object&gt; feature = new HashMap&lt;String, Object&gt;();
+    feature.put("definition", Arrays.asList(fbData.getMeta().getId().getPrettyFormat()));
+    feature.put("properties", createFunctionBlockProperties(fbData));
+    return feature;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag591')" href="javascript:;">
+vorto/mapping-engine/mapping-targetplatform/mapping-targetplatform-ditto/src/main/java/org/eclipse/vorto/mapping/targetplatform/ditto/TwinPayloadFactory.java: 100-105
+</a>
+<div class="mid" id="frag591" style="display:none"><pre>
+  private static Object createFeature(FunctionblockValue fbData) {
+    Map&lt;String, Object&gt; feature = new HashMap&lt;String, Object&gt;();
+    feature.put("definition", Arrays.asList(fbData.getMeta().getId().getPrettyFormat()));
+    feature.put("properties", createFunctionBlockProperties(fbData));
+    return feature;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 10:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag489')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/twin/TwinPayloadFactory.java: 68-72
+</a>
+<div class="mid" id="frag489" style="display:none"><pre>
+  private static Object createHeader() {
+    Map&lt;String, Object&gt; header = new HashMap&lt;String, Object&gt;();
+    header.put("response-required", false);
+    return header;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag592')" href="javascript:;">
+vorto/mapping-engine/mapping-targetplatform/mapping-targetplatform-ditto/src/main/java/org/eclipse/vorto/mapping/targetplatform/ditto/TwinPayloadFactory.java: 107-111
+</a>
+<div class="mid" id="frag592" style="display:none"><pre>
+  private static Object createHeader() {
+    Map&lt;String, Object&gt; header = new HashMap&lt;String, Object&gt;();
+    header.put("response-required", false);
+    return header;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 11:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag490')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/twin/TwinPayloadFactory.java: 84-94
+</a>
+<div class="mid" id="frag490" style="display:none"><pre>
+  public static JsonObject toDittoProtocol(FunctionblockValue functionblockData, String featureId,
+      String dittoNamespace, String dittoIdSuffix) {
+    Map&lt;String, Object&gt; dittoPayload = new HashMap&lt;String, Object&gt;();
+    dittoPayload.put("topic",
+        dittoNamespace + "/" + dittoIdSuffix + "/things/twin/commands/modify");
+    dittoPayload.put("headers", createHeader());
+    dittoPayload.put("path", "/features/" + featureId + "/properties");
+
+    dittoPayload.put("value", createFunctionBlockProperties(functionblockData));
+    return gson.toJsonTree(dittoPayload).getAsJsonObject();
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag593')" href="javascript:;">
+vorto/mapping-engine/mapping-targetplatform/mapping-targetplatform-ditto/src/main/java/org/eclipse/vorto/mapping/targetplatform/ditto/TwinPayloadFactory.java: 123-133
+</a>
+<div class="mid" id="frag593" style="display:none"><pre>
+  public static JsonObject toDittoProtocol(FunctionblockValue functionblockData, String featureId,
+      String dittoNamespace, String dittoIdSuffix) {
+    Map&lt;String, Object&gt; dittoPayload = new HashMap&lt;String, Object&gt;();
+    dittoPayload.put("topic",
+        dittoNamespace + "/" + dittoIdSuffix + "/things/twin/commands/modify");
+    dittoPayload.put("headers", createHeader());
+    dittoPayload.put("path", "/features/" + featureId + "/properties");
+
+    dittoPayload.put("value", createFunctionBlockProperties(functionblockData));
+    return gson.toJsonTree(dittoPayload).getAsJsonObject();
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 12:</b> &nbsp; 2 fragments, nominal size 18 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag491')" href="javascript:;">
+vorto/mapping-engine/mapping-core/src/main/java/org/eclipse/vorto/mapping/engine/twin/TwinPayloadFactory.java: 96-120
+</a>
+<div class="mid" id="frag491" style="display:none"><pre>
+  private static Map&lt;String,Object&gt; createFunctionBlockProperties(FunctionblockValue fbData) {
+    Map&lt;String, Object&gt; result = new HashMap&lt;String, Object&gt;();
+
+    Map&lt;String, Object&gt; status = new HashMap&lt;String, Object&gt;();
+
+    for (PropertyValue statusProperty : fbData.getStatus()) {
+      status.put(statusProperty.getMeta().getName(), statusProperty.serialize());
+    }
+    
+    if (!status.isEmpty()) {
+      result.put("status", status);
+    }
+
+    Map&lt;String, Object&gt; config = new HashMap&lt;String, Object&gt;();
+
+    for (PropertyValue configProperty : fbData.getConfiguration()) {
+      config.put(configProperty.getMeta().getName(), configProperty.serialize());
+    }
+    
+    if (!config.isEmpty()) {
+      result.put("configuration", config);
+    }
+    
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag594')" href="javascript:;">
+vorto/mapping-engine/mapping-targetplatform/mapping-targetplatform-ditto/src/main/java/org/eclipse/vorto/mapping/targetplatform/ditto/TwinPayloadFactory.java: 135-159
+</a>
+<div class="mid" id="frag594" style="display:none"><pre>
+  private static Map&lt;String,Object&gt; createFunctionBlockProperties(FunctionblockValue fbData) {
+    Map&lt;String, Object&gt; result = new HashMap&lt;String, Object&gt;();
+
+    Map&lt;String, Object&gt; status = new HashMap&lt;String, Object&gt;();
+
+    for (PropertyValue statusProperty : fbData.getStatus()) {
+      status.put(statusProperty.getMeta().getName(), statusProperty.serialize());
+    }
+    
+    if (!status.isEmpty()) {
+      result.put("status", status);
+    }
+
+    Map&lt;String, Object&gt; config = new HashMap&lt;String, Object&gt;();
+
+    for (PropertyValue configProperty : fbData.getConfiguration()) {
+      config.put(configProperty.getMeta().getName(), configProperty.serialize());
+    }
+    
+    if (!config.isEmpty()) {
+      result.put("configuration", config);
+    }
+    
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 13:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag640')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/AbstractProperty.java: 83-90
+</a>
+<div class="mid" id="frag640" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (mandatory ? 1231 : 1237);
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1549')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/AbstractProperty.java: 84-91
+</a>
+<div class="mid" id="frag1549" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (mandatory ? 1231 : 1237);
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 14:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag641')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/AbstractProperty.java: 93-100
+</a>
+<div class="mid" id="frag641" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    AbstractProperty other = (AbstractProperty) obj;
+    if (mandatory == other.mandatory &amp;&amp; name.equals(other.name) &amp;&amp; type.equals(other.type))
+      return true;
+    else {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1550')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/AbstractProperty.java: 94-101
+</a>
+<div class="mid" id="frag1550" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    AbstractProperty other = (AbstractProperty) obj;
+    if (mandatory == other.mandatory &amp;&amp; name.equals(other.name) &amp;&amp; type.equals(other.type))
+      return true;
+    else {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 15:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag642')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/BooleanAttributeProperty.java: 21-25
+</a>
+<div class="mid" id="frag642" style="display:none"><pre>
+  public BooleanAttributeProperty(BooleanAttributePropertyType type, boolean value) {
+    super();
+    this.type = type;
+    this.value = value;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1551')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/BooleanAttributeProperty.java: 22-26
+</a>
+<div class="mid" id="frag1551" style="display:none"><pre>
+  public BooleanAttributeProperty(BooleanAttributePropertyType type, boolean value) {
+    super();
+    this.type = type;
+    this.value = value;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 16:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag684')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/EnumAttributeProperty.java: 20-24
+</a>
+<div class="mid" id="frag684" style="display:none"><pre>
+  public EnumAttributeProperty(EnumAttributePropertyType type, EnumLiteral value) {
+    super();
+    this.type = type;
+    this.value = value;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1578')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/EnumAttributeProperty.java: 21-25
+</a>
+<div class="mid" id="frag1578" style="display:none"><pre>
+  public EnumAttributeProperty(EnumAttributePropertyType type, EnumLiteral value) {
+    super();
+    this.type = type;
+    this.value = value;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 17:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag764')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelId.java: 33-38
+</a>
+<div class="mid" id="frag764" style="display:none"><pre>
+  public ModelId(String name, String namespace, String version) {
+    super();
+    this.name = name;
+    this.namespace = namespace.toLowerCase();
+    this.version = version;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1706')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelId.java: 28-33
+</a>
+<div class="mid" id="frag1706" style="display:none"><pre>
+  public ModelId(String name, String namespace, String version) {
+    super();
+    this.name = name;
+    this.namespace = namespace.toLowerCase();
+    this.version = version;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 18:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag765')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelId.java: 40-44
+</a>
+<div class="mid" id="frag765" style="display:none"><pre>
+  public static ModelId fromReference(String qualifiedName, String version) {
+    String name = qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1);
+    String namespace = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
+    return new ModelId(name, namespace, version);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1707')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelId.java: 35-39
+</a>
+<div class="mid" id="frag1707" style="display:none"><pre>
+  public static ModelId fromReference(String qualifiedName, String version) {
+    String name = qualifiedName.substring(qualifiedName.lastIndexOf(".") + 1);
+    String namespace = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
+    return new ModelId(name, namespace, version);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 19:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag775')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelId.java: 92-99
+</a>
+<div class="mid" id="frag775" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((namespace == null) ? 0 : namespace.hashCode());
+    result = prime * result + ((version == null) ? 0 : version.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1717')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelId.java: 86-93
+</a>
+<div class="mid" id="frag1717" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + ((namespace == null) ? 0 : namespace.hashCode());
+    result = prime * result + ((version == null) ? 0 : version.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 20:</b> &nbsp; 2 fragments, nominal size 18 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag799')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelType.java: 31-44
+</a>
+<div class="mid" id="frag799" style="display:none"><pre>
+  public static ModelType fromFileName(String fileName) {
+    String type = fileName.substring(fileName.lastIndexOf("."));
+    if (type.equals(ModelType.Functionblock.getExtension())) {
+      return ModelType.Functionblock;
+    } else if (type.equals(ModelType.InformationModel.getExtension())) {
+      return ModelType.InformationModel;
+    } else if (type.equals(ModelType.Datatype.getExtension())) {
+      return ModelType.Datatype;
+    } else if (type.equals(ModelType.Mapping.getExtension())) {
+      return ModelType.Mapping;
+    } else {
+      throw new UnsupportedOperationException();
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1754')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelType.java: 32-45
+</a>
+<div class="mid" id="frag1754" style="display:none"><pre>
+  public static ModelType fromFileName(String fileName) {
+    String type = fileName.substring(fileName.lastIndexOf("."));
+    if (type.equals(ModelType.Functionblock.getExtension())) {
+      return ModelType.Functionblock;
+    } else if (type.equals(ModelType.InformationModel.getExtension())) {
+      return ModelType.InformationModel;
+    } else if (type.equals(ModelType.Datatype.getExtension())) {
+      return ModelType.Datatype;
+    } else if (type.equals(ModelType.Mapping.getExtension())) {
+      return ModelType.Mapping;
+    } else {
+      throw new UnsupportedOperationException();
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 21:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag800')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelType.java: 46-53
+</a>
+<div class="mid" id="frag800" style="display:none"><pre>
+  public static boolean containsType(String type) {
+    for (ModelType mType : ModelType.values()) {
+      if (mType.name().equals(type)) {
+        return true;
+      }
+    }
+    return false;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1755')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelType.java: 47-54
+</a>
+<div class="mid" id="frag1755" style="display:none"><pre>
+  public static boolean containsType(String type) {
+    for (ModelType mType : ModelType.values()) {
+      if (mType.name().equals(type)) {
+        return true;
+      }
+    }
+    return false;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 22:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag802')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/ModelType.java: 64-77
+</a>
+<div class="mid" id="frag802" style="display:none"><pre>
+  public boolean canHandleReference(IModel reference) {
+    if (this == ModelType.InformationModel &amp;&amp; reference.getType() == ModelType.Functionblock) {
+      return true;
+    } else if (this == ModelType.Functionblock &amp;&amp; (reference.getType() == ModelType.Functionblock
+        || reference.getType() == ModelType.Datatype)) {
+      return true;
+    } else if (this == ModelType.Datatype &amp;&amp; reference.getType() == ModelType.Datatype) {
+      return true;
+    } else if (this == ModelType.Mapping) { // mapping allow all reference types
+      return true;
+    } else {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1756')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelType.java: 56-69
+</a>
+<div class="mid" id="frag1756" style="display:none"><pre>
+  public boolean canHandleReference(IModel reference) {
+    if (this == ModelType.InformationModel &amp;&amp; reference.getType() == ModelType.Functionblock) {
+      return true;
+    } else if (this == ModelType.Functionblock &amp;&amp; (reference.getType() == ModelType.Functionblock
+        || reference.getType() == ModelType.Datatype)) {
+      return true;
+    } else if (this == ModelType.Datatype &amp;&amp; reference.getType() == ModelType.Datatype) {
+      return true;
+    } else if (this == ModelType.Mapping) { // mapping allow all reference types
+      return true;
+    } else {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 23:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag839')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 33-37
+</a>
+<div class="mid" id="frag839" style="display:none"><pre>
+  public static Stereotype createWithFunction(String functionName, String functionBody) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(functionName, functionBody);
+    return new Stereotype(FUNCTIONS, attributes);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1646')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 34-38
+</a>
+<div class="mid" id="frag1646" style="display:none"><pre>
+  public static Stereotype createWithFunction(String functionName, String functionBody) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(functionName, functionBody);
+    return new Stereotype(FUNCTIONS, attributes);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 24:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag840')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 39-43
+</a>
+<div class="mid" id="frag840" style="display:none"><pre>
+  public static Stereotype createWithXpath(String xpath) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(XPATH_ATT, xpath);
+    return new Stereotype(SOURCE, attributes);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1647')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 40-44
+</a>
+<div class="mid" id="frag1647" style="display:none"><pre>
+  public static Stereotype createWithXpath(String xpath) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(XPATH_ATT, xpath);
+    return new Stereotype(SOURCE, attributes);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 25:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag841')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 45-50
+</a>
+<div class="mid" id="frag841" style="display:none"><pre>
+  public static Stereotype createOperationTarget(String key, String value) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(KEY_ATT, key);
+    attributes.put(VALUE_ATT, value);
+    return new Stereotype(TARGET, attributes);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1648')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 46-51
+</a>
+<div class="mid" id="frag1648" style="display:none"><pre>
+  public static Stereotype createOperationTarget(String key, String value) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(1);
+    attributes.put(KEY_ATT, key);
+    attributes.put(VALUE_ATT, value);
+    return new Stereotype(TARGET, attributes);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 26:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag844')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 63-68
+</a>
+<div class="mid" id="frag844" style="display:none"><pre>
+  public static Stereotype createWithConditionalXpath(String condition, String xpath) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(2);
+    attributes.put(CONDITION_ATT, condition);
+    attributes.put(XPATH_ATT, xpath);
+    return new Stereotype(SOURCE, attributes);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1650')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 58-63
+</a>
+<div class="mid" id="frag1650" style="display:none"><pre>
+  public static Stereotype createWithConditionalXpath(String condition, String xpath) {
+    Map&lt;String, String&gt; attributes = new HashMap&lt;String, String&gt;(2);
+    attributes.put(CONDITION_ATT, condition);
+    attributes.put(XPATH_ATT, xpath);
+    return new Stereotype(SOURCE, attributes);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 27:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag853')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 105-111
+</a>
+<div class="mid" id="frag853" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((attributes == null) ? 0 : attributes.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1659')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 100-106
+</a>
+<div class="mid" id="frag1659" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((attributes == null) ? 0 : attributes.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 28:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag854')" href="javascript:;">
+vorto/model/src/main/java/org/eclipse/vorto/model/Stereotype.java: 114-133
+</a>
+<div class="mid" id="frag854" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Stereotype other = (Stereotype) obj;
+    if (attributes == null) {
+      if (other.attributes != null)
+        return false;
+    } else if (!attributes.equals(other.attributes))
+      return false;
+    if (name == null) {
+      if (other.name != null)
+        return false;
+    } else if (!name.equals(other.name))
+      return false;
+    return true;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1660')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/content/Stereotype.java: 109-128
+</a>
+<div class="mid" id="frag1660" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Stereotype other = (Stereotype) obj;
+    if (attributes == null) {
+      if (other.attributes != null)
+        return false;
+    } else if (!attributes.equals(other.attributes))
+      return false;
+    if (name == null) {
+      if (other.name != null)
+        return false;
+    } else if (!name.equals(other.name))
+      return false;
+    return true;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 29:</b> &nbsp; 3 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag987')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/adapter/ObjectMapperFactory.java: 132-140
+</a>
+<div class="mid" id="frag987" style="display:none"><pre>
+    private ModelId getModelId(String modelId) {
+      try {
+        return ModelId.fromPrettyFormat(modelId);
+      } catch (IllegalArgumentException ex) {
+        final int versionIndex = modelId.indexOf(":");
+        return ModelId.fromReference(modelId.substring(0, versionIndex),
+            modelId.substring(versionIndex + 1));
+      }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4432')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/impl/ImplementationBase.java: 148-155
+</a>
+<div class="mid" id="frag4432" style="display:none"><pre>
+        private ModelId getModelId(String modelId) {
+            try {
+                return ModelId.fromPrettyFormat(modelId);
+            } catch(IllegalArgumentException ex) {
+                final int versionIndex = modelId.indexOf(":");
+                return ModelId.fromReference(modelId.substring(0,versionIndex),modelId.substring(versionIndex+1));
+            }
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1397')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/ObjectMapperFactory.java: 177-185
+</a>
+<div class="mid" id="frag1397" style="display:none"><pre>
+    private ModelId getModelId(String modelId) {
+      try {
+        return ModelId.fromPrettyFormat(modelId);
+      } catch (IllegalArgumentException ex) {
+        final int versionIndex = modelId.indexOf(":");
+        return ModelId.fromReference(modelId.substring(0, versionIndex),
+            modelId.substring(versionIndex + 1));
+      }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 30:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1004')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/config/ConfigTemplateBuilder.java: 64-68
+</a>
+<div class="mid" id="frag1004" style="display:none"><pre>
+    private ChoiceItem(String label, String value) {
+      super();
+      this.label = label;
+      this.value = value;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1252')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/GeneratorInfo.java: 136-140
+</a>
+<div class="mid" id="frag1252" style="display:none"><pre>
+    private ChoiceItem(String label, String value) {
+      super();
+      this.label = label;
+      this.value = value;
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 31:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1040')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 95-108
+</a>
+<div class="mid" id="frag1040" style="display:none"><pre>
+  public IMapped&lt;InformationModel&gt; getMappedElement(final InformationModel informationModel,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof InfomodelSource
+            &amp;&amp; EcoreUtil.equals(((InfomodelSource) ruleSource).getModel(), informationModel)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;InformationModel&gt;(informationModel,
+              (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;InformationModel&gt;(informationModel);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1295')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 105-118
+</a>
+<div class="mid" id="frag1295" style="display:none"><pre>
+  public IMapped&lt;InformationModel&gt; getMappedElement(final InformationModel informationModel,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof InfomodelSource
+            &amp;&amp; EcoreUtil.equals(((InfomodelSource) ruleSource).getModel(), informationModel)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;InformationModel&gt;(informationModel,
+              (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;InformationModel&gt;(informationModel);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 32:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1041')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 117-130
+</a>
+<div class="mid" id="frag1041" style="display:none"><pre>
+  public IMapped&lt;FunctionblockModel&gt; getMappedElement(final FunctionblockModel functionblockModel,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof FunctionBlockSource
+            &amp;&amp; EcoreUtil.equals(((FunctionBlockSource) ruleSource).getModel(), functionblockModel)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;FunctionblockModel&gt;(functionblockModel,
+              (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;FunctionblockModel&gt;(functionblockModel);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1296')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 127-140
+</a>
+<div class="mid" id="frag1296" style="display:none"><pre>
+  public IMapped&lt;FunctionblockModel&gt; getMappedElement(final FunctionblockModel functionblockModel,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof FunctionBlockSource
+            &amp;&amp; EcoreUtil.equals(((FunctionBlockSource) ruleSource).getModel(), functionblockModel)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;FunctionblockModel&gt;(functionblockModel,
+              (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;FunctionblockModel&gt;(functionblockModel);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 33:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1042')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 139-151
+</a>
+<div class="mid" id="frag1042" style="display:none"><pre>
+  public IMapped&lt;EnumLiteral&gt; getMappedElement(final EnumLiteral enumLiteral,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof EnumPropertySource
+            &amp;&amp; EcoreUtil.equals(((EnumPropertySource) ruleSource).getProperty(), enumLiteral)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;EnumLiteral&gt;(enumLiteral, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;EnumLiteral&gt;(enumLiteral);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1297')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 149-161
+</a>
+<div class="mid" id="frag1297" style="display:none"><pre>
+  public IMapped&lt;EnumLiteral&gt; getMappedElement(final EnumLiteral enumLiteral,
+      final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof EnumPropertySource
+            &amp;&amp; EcoreUtil.equals(((EnumPropertySource) ruleSource).getProperty(), enumLiteral)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;EnumLiteral&gt;(enumLiteral, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+    return new NullMapped&lt;EnumLiteral&gt;(enumLiteral);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 34:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1044')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 158-164
+</a>
+<div class="mid" id="frag1044" style="display:none"><pre>
+  private boolean matchesProperty(final Property srcProp, final Property tgtProp) {
+    FunctionBlock srcFb = (FunctionBlock) srcProp.eContainer().eContainer();
+    FunctionBlock tgtFb = (FunctionBlock) tgtProp.eContainer().eContainer();
+    FunctionblockModel srcFbModel = (FunctionblockModel) srcFb.eContainer();
+    FunctionblockModel tgtFbModel = (FunctionblockModel) tgtFb.eContainer();
+    return EcoreUtil.equals(srcProp, tgtProp) &amp;&amp; EcoreUtil.equals(srcFbModel, tgtFbModel);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1299')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 168-174
+</a>
+<div class="mid" id="frag1299" style="display:none"><pre>
+  private boolean matchesProperty(final Property srcProp, final Property tgtProp) {
+    FunctionBlock srcFb = (FunctionBlock) srcProp.eContainer().eContainer();
+    FunctionBlock tgtFb = (FunctionBlock) tgtProp.eContainer().eContainer();
+    FunctionblockModel srcFbModel = (FunctionblockModel) srcFb.eContainer();
+    FunctionblockModel tgtFbModel = (FunctionblockModel) tgtFb.eContainer();
+    return EcoreUtil.equals(srcProp, tgtProp) &amp;&amp; EcoreUtil.equals(srcFbModel, tgtFbModel);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 35:</b> &nbsp; 2 fragments, nominal size 19 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1045')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 173-198
+</a>
+<div class="mid" id="frag1045" style="display:none"><pre>
+  public IMapped&lt;Property&gt; getMappedElement(final Property property, final String stereoType) {
+
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof ConfigurationSource
+            &amp;&amp; matchesProperty(((ConfigurationSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof StatusSource
+            &amp;&amp; matchesProperty(((StatusSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof FaultSource
+            &amp;&amp; matchesProperty(((FaultSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof EntityPropertySource
+            &amp;&amp; matchesProperty(((EntityPropertySource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;Property&gt;(property);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1300')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 183-208
+</a>
+<div class="mid" id="frag1300" style="display:none"><pre>
+  public IMapped&lt;Property&gt; getMappedElement(final Property property, final String stereoType) {
+
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof ConfigurationSource
+            &amp;&amp; matchesProperty(((ConfigurationSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof StatusSource
+            &amp;&amp; matchesProperty(((StatusSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof FaultSource
+            &amp;&amp; matchesProperty(((FaultSource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        } else if (ruleSource instanceof EntityPropertySource
+            &amp;&amp; matchesProperty(((EntityPropertySource) ruleSource).getProperty(), property)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Property&gt;(property, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;Property&gt;(property);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 36:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1046')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 200-206
+</a>
+<div class="mid" id="frag1046" style="display:none"><pre>
+  private boolean matchesOperation(final Operation srcOp, final Operation tgtOp) {
+    FunctionBlock srcFb = (FunctionBlock) srcOp.eContainer();
+    FunctionBlock tgtFb = (FunctionBlock) tgtOp.eContainer();
+    FunctionblockModel srcFbModel = (FunctionblockModel) srcFb.eContainer();
+    FunctionblockModel tgtFbModel = (FunctionblockModel) tgtFb.eContainer();
+    return EcoreUtil.equals(srcOp, tgtOp) &amp;&amp; EcoreUtil.equals(srcFbModel, tgtFbModel);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1301')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 210-216
+</a>
+<div class="mid" id="frag1301" style="display:none"><pre>
+  private boolean matchesOperation(final Operation srcOp, final Operation tgtOp) {
+    FunctionBlock srcFb = (FunctionBlock) srcOp.eContainer();
+    FunctionBlock tgtFb = (FunctionBlock) tgtOp.eContainer();
+    FunctionblockModel srcFbModel = (FunctionblockModel) srcFb.eContainer();
+    FunctionblockModel tgtFbModel = (FunctionblockModel) tgtFb.eContainer();
+    return EcoreUtil.equals(srcOp, tgtOp) &amp;&amp; EcoreUtil.equals(srcFbModel, tgtFbModel);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 37:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1047')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 215-227
+</a>
+<div class="mid" id="frag1047" style="display:none"><pre>
+  public IMapped&lt;Operation&gt; getMappedElement(final Operation operation, final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof OperationSource
+            &amp;&amp; matchesOperation(((OperationSource) ruleSource).getOperation(), operation)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Operation&gt;(operation, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;Operation&gt;(operation);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1302')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 225-237
+</a>
+<div class="mid" id="frag1302" style="display:none"><pre>
+  public IMapped&lt;Operation&gt; getMappedElement(final Operation operation, final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (ruleSource instanceof OperationSource
+            &amp;&amp; matchesOperation(((OperationSource) ruleSource).getOperation(), operation)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;Operation&gt;(operation, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;Operation&gt;(operation);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 38:</b> &nbsp; 2 fragments, nominal size 19 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1048')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/InvocationContext.java: 236-262
+</a>
+<div class="mid" id="frag1048" style="display:none"><pre>
+  public IMapped&lt;ModelAttribute&gt; getMappedModelAttribute(final Model model,
+      final ModelAttribute attribute, final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (model instanceof InformationModel &amp;&amp; ruleSource instanceof InfoModelAttributeSource
+            &amp;&amp; ((InfoModelAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof FunctionblockModel
+            &amp;&amp; ruleSource instanceof FunctionBlockAttributeSource
+            &amp;&amp; ((FunctionBlockAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof Enum &amp;&amp; ruleSource instanceof EnumAttributeSource
+            &amp;&amp; ((EnumAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof Entity &amp;&amp; ruleSource instanceof EnumAttributeSource
+            &amp;&amp; ((EntityAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;ModelAttribute&gt;(attribute);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1303')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/InvocationContext.java: 246-272
+</a>
+<div class="mid" id="frag1303" style="display:none"><pre>
+  public IMapped&lt;ModelAttribute&gt; getMappedModelAttribute(final Model model,
+      final ModelAttribute attribute, final String stereoType) {
+    for (MappingRule rule : mappingRules) {
+      for (Source ruleSource : rule.getSources()) {
+        if (model instanceof InformationModel &amp;&amp; ruleSource instanceof InfoModelAttributeSource
+            &amp;&amp; ((InfoModelAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof FunctionblockModel
+            &amp;&amp; ruleSource instanceof FunctionBlockAttributeSource
+            &amp;&amp; ((FunctionBlockAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof Enum &amp;&amp; ruleSource instanceof EnumAttributeSource
+            &amp;&amp; ((EnumAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        } else if (model instanceof Entity &amp;&amp; ruleSource instanceof EnumAttributeSource
+            &amp;&amp; ((EntityAttributeSource) ruleSource).getAttribute().equals(attribute)
+            &amp;&amp; matchesStereoType(stereoType, (StereoTypeTarget) rule.getTarget())) {
+          return new DefaultMapped&lt;ModelAttribute&gt;(attribute, (StereoTypeTarget) rule.getTarget());
+        }
+      }
+    }
+
+    return new NullMapped&lt;ModelAttribute&gt;(attribute);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 39:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1055')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/mapping/DefaultMapped.java: 40-48
+</a>
+<div class="mid" id="frag1055" style="display:none"><pre>
+  public boolean hasAttribute(String attributeName) {
+    for (Attribute attribute : stereoType.getAttributes()) {
+      if (attribute.getName().equalsIgnoreCase(attributeName)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1317')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/mapping/DefaultMapped.java: 44-52
+</a>
+<div class="mid" id="frag1317" style="display:none"><pre>
+  public boolean hasAttribute(String attributeName) {
+    for (Attribute attribute : stereoType.getAttributes()) {
+      if (attribute.getName().equalsIgnoreCase(attributeName)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 40:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1056')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/mapping/DefaultMapped.java: 51-59
+</a>
+<div class="mid" id="frag1056" style="display:none"><pre>
+  public String getAttributeValue(String attributeName, String defaultValue) {
+    for (Attribute attribute : stereoType.getAttributes()) {
+      if (attribute.getName().equalsIgnoreCase(attributeName)) {
+        return attribute.getValue();
+      }
+    }
+
+    return defaultValue;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1318')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/mapping/DefaultMapped.java: 55-63
+</a>
+<div class="mid" id="frag1318" style="display:none"><pre>
+  public String getAttributeValue(String attributeName, String defaultValue) {
+    for (Attribute attribute : stereoType.getAttributes()) {
+      if (attribute.getName().equalsIgnoreCase(attributeName)) {
+        return attribute.getValue();
+      }
+    }
+
+    return defaultValue;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 41:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1066')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/ChainedCodeGeneratorTask.java: 32-36
+</a>
+<div class="mid" id="frag1066" style="display:none"><pre>
+  public void generate(Element element, InvocationContext context, IGeneratedWriter outputter) {
+    for (ICodeGeneratorTask&lt;Element&gt; task : tasks) {
+      task.generate(element, context, outputter);
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1200')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/ChainedCodeGeneratorTask.java: 30-34
+</a>
+<div class="mid" id="frag1200" style="display:none"><pre>
+  public void generate(Element element, InvocationContext context, IGeneratedWriter outputter) {
+    for (ICodeGeneratorTask&lt;Element&gt; task : tasks) {
+      task.generate(element, context, outputter);
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 42:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1068')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/DatatypeGeneratorTask.java: 50-66
+</a>
+<div class="mid" id="frag1068" style="display:none"><pre>
+  public void generate(InformationModel ctx, InvocationContext context, IGeneratedWriter writer) {
+    Set&lt;Type&gt; allTypesUsedInModel = new HashSet&lt;&gt;();
+    for (FunctionblockProperty prop : ctx.getProperties()) {
+      allTypesUsedInModel.addAll(getTypes(prop.getType()));
+    }
+
+    for (Type type : allTypesUsedInModel) {
+      if (type instanceof Entity) {
+        writer.write(new Generated(entityTemplate.getFileName((Entity) type),
+            entityTemplate.getPath((Entity) type),
+            entityTemplate.getContent((Entity) type, context)));
+      } else if (type instanceof Enum) {
+        writer.write(new Generated(enumTemplate.getFileName((Enum) type),
+            enumTemplate.getPath((Enum) type), enumTemplate.getContent((Enum) type, context)));
+      }
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1209')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/DatatypeGeneratorTask.java: 46-62
+</a>
+<div class="mid" id="frag1209" style="display:none"><pre>
+  public void generate(InformationModel ctx, InvocationContext context, IGeneratedWriter writer) {
+    Set&lt;Type&gt; allTypesUsedInModel = new HashSet&lt;&gt;();
+    for (FunctionblockProperty prop : ctx.getProperties()) {
+      allTypesUsedInModel.addAll(getTypes(prop.getType()));
+    }
+
+    for (Type type : allTypesUsedInModel) {
+      if (type instanceof Entity) {
+        writer.write(new Generated(entityTemplate.getFileName((Entity) type),
+            entityTemplate.getPath((Entity) type),
+            entityTemplate.getContent((Entity) type, context)));
+      } else if (type instanceof Enum) {
+        writer.write(new Generated(enumTemplate.getFileName((Enum) type),
+            enumTemplate.getPath((Enum) type), enumTemplate.getContent((Enum) type, context)));
+      }
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 43:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1069')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/DatatypeGeneratorTask.java: 68-82
+</a>
+<div class="mid" id="frag1069" style="display:none"><pre>
+  private static Set&lt;Type&gt; getTypes(FunctionblockModel model) {
+    Set&lt;Type&gt; allTypes = new LinkedHashSet&lt;&gt;();
+    TreeIterator&lt;EObject&gt; iterator = model.eAllContents();
+    while (iterator.hasNext()) {
+      EObject current = iterator.next();
+      if (current instanceof RefParam) {
+        addTypeAndReferences(((RefParam) current).getType(), allTypes);
+      } else if (current instanceof ReturnObjectType) {
+        addTypeAndReferences(((ReturnObjectType) current).getReturnType(), allTypes);
+      } else if (current instanceof ObjectPropertyType) {
+        addTypeAndReferences(((ObjectPropertyType) current).getType(), allTypes);
+      }
+    }
+    return allTypes;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1210')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/DatatypeGeneratorTask.java: 64-78
+</a>
+<div class="mid" id="frag1210" style="display:none"><pre>
+  private static Set&lt;Type&gt; getTypes(FunctionblockModel model) {
+    Set&lt;Type&gt; allTypes = new LinkedHashSet&lt;&gt;();
+    TreeIterator&lt;EObject&gt; iterator = model.eAllContents();
+    while (iterator.hasNext()) {
+      EObject current = iterator.next();
+      if (current instanceof RefParam) {
+        addTypeAndReferences(((RefParam) current).getType(), allTypes);
+      } else if (current instanceof ReturnObjectType) {
+        addTypeAndReferences(((ReturnObjectType) current).getReturnType(), allTypes);
+      } else if (current instanceof ObjectPropertyType) {
+        addTypeAndReferences(((ObjectPropertyType) current).getType(), allTypes);
+      }
+    }
+    return allTypes;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 44:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1070')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/DatatypeGeneratorTask.java: 84-90
+</a>
+<div class="mid" id="frag1070" style="display:none"><pre>
+  private static void addTypeAndReferences(Type type, Set&lt;Type&gt; container) {
+    if (!container.contains(type)) {
+      container.add(type);
+      Set&lt;Type&gt; references = getTypesOfType(type, container);
+      container.addAll(references);
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1211')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/DatatypeGeneratorTask.java: 80-86
+</a>
+<div class="mid" id="frag1211" style="display:none"><pre>
+  private static void addTypeAndReferences(Type type, Set&lt;Type&gt; container) {
+    if (!container.contains(type)) {
+      container.add(type);
+      Set&lt;Type&gt; references = getTypesOfType(type, container);
+      container.addAll(references);
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 45:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1071')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/DatatypeGeneratorTask.java: 92-107
+</a>
+<div class="mid" id="frag1071" style="display:none"><pre>
+  private static Set&lt;Type&gt; getTypesOfType(Type type, Set&lt;Type&gt; container) {
+    TreeIterator&lt;EObject&gt; iterator = type.eAllContents();
+    while (iterator.hasNext()) {
+      EObject current = iterator.next();
+      if (current instanceof ObjectPropertyType) {
+        if (!container.contains(current)) {
+          container.add(((ObjectPropertyType) current).getType());
+          Set&lt;Type&gt; moreTypes = getTypesOfType(((ObjectPropertyType) current).getType(), container);
+          container.addAll(moreTypes);
+        }
+
+      }
+    }
+
+    return container;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1212')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/DatatypeGeneratorTask.java: 88-103
+</a>
+<div class="mid" id="frag1212" style="display:none"><pre>
+  private static Set&lt;Type&gt; getTypesOfType(Type type, Set&lt;Type&gt; container) {
+    TreeIterator&lt;EObject&gt; iterator = type.eAllContents();
+    while (iterator.hasNext()) {
+      EObject current = iterator.next();
+      if (current instanceof ObjectPropertyType) {
+        if (!container.contains(current)) {
+          container.add(((ObjectPropertyType) current).getType());
+          Set&lt;Type&gt; moreTypes = getTypesOfType(((ObjectPropertyType) current).getType(), container);
+          container.addAll(moreTypes);
+        }
+
+      }
+    }
+
+    return container;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 46:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1072')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/FileContent.java: 20-24
+</a>
+<div class="mid" id="frag1072" style="display:none"><pre>
+  public FileContent(String fileName, byte[] value) {
+    super();
+    this.fileName = fileName;
+    this.value = value;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1218')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/FileContent.java: 24-28
+</a>
+<div class="mid" id="frag1218" style="display:none"><pre>
+  public FileContent(String fileName, byte[] value) {
+    super();
+    this.fileName = fileName;
+    this.value = value;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 47:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1075')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/Generated.java: 25-29
+</a>
+<div class="mid" id="frag1075" style="display:none"><pre>
+  public Generated(String fileName, String folderPath, byte[] content) {
+    this.fileName = fileName;
+    this.folderPath = folderPath;
+    this.content = content;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1221')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/Generated.java: 26-30
+</a>
+<div class="mid" id="frag1221" style="display:none"><pre>
+  public Generated(String fileName, String folderPath, byte[] content) {
+    this.fileName = fileName;
+    this.folderPath = folderPath;
+    this.content = content;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 48:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1086')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/GenerationResultZip.java: 35-39
+</a>
+<div class="mid" id="frag1086" style="display:none"><pre>
+  public GenerationResultZip(String fileName) {
+    this.fileName = fileName;
+    baos = new ByteArrayOutputStream();
+    this.zos = new ZipOutputStream(baos);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1227')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/GenerationResultZip.java: 32-36
+</a>
+<div class="mid" id="frag1227" style="display:none"><pre>
+  public GenerationResultZip(String fileName) {
+    this.fileName = fileName;
+    baos = new ByteArrayOutputStream();
+    this.zos = new ZipOutputStream(baos);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 49:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1088')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/GenerationResultZip.java: 46-63
+</a>
+<div class="mid" id="frag1088" style="display:none"><pre>
+  public void write(Generated generated) {
+    ZipEntry zipEntry;
+    if (generated.getFolderPath() == null || generated.getFolderPath().isEmpty()) {
+      zipEntry = new ZipEntry(generated.getFileName());
+    } else {
+      zipEntry = new ZipEntry(
+          cleanDirectoryPath(generated.getFolderPath()) + "/" + generated.getFileName());
+    }
+
+    try {
+      zos.putNextEntry(zipEntry);
+      zos.write(generated.getContent());
+      zos.closeEntry();
+    } catch (Exception e) {
+      // possibly occurs if generated output already appears as zipentry, in this case skip and
+      // continue. TODO: Ugly :(
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1229')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/GenerationResultZip.java: 43-60
+</a>
+<div class="mid" id="frag1229" style="display:none"><pre>
+  public void write(Generated generated) {
+    ZipEntry zipEntry;
+    if (generated.getFolderPath() == null || generated.getFolderPath().isEmpty()) {
+      zipEntry = new ZipEntry(generated.getFileName());
+    } else {
+      zipEntry = new ZipEntry(
+          cleanDirectoryPath(generated.getFolderPath()) + "/" + generated.getFileName());
+    }
+
+    try {
+      zos.putNextEntry(zipEntry);
+      zos.write(generated.getContent());
+      zos.closeEntry();
+    } catch (Exception e) {
+      // possibly occurs if generated output already appears as zipentry, in this case skip and
+      // continue. TODO: Ugly :(
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 50:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1089')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/GenerationResultZip.java: 65-76
+</a>
+<div class="mid" id="frag1089" style="display:none"><pre>
+  private String cleanDirectoryPath(String outputDirectory) {
+    String _outputDirectory = outputDirectory;
+    if (outputDirectory.charAt(outputDirectory.length() - 1) == '/') {
+      _outputDirectory = outputDirectory.substring(0, outputDirectory.length() - 1);
+    }
+
+    if (_outputDirectory.charAt(0) == '/') {
+      _outputDirectory = _outputDirectory.substring(1);
+    }
+
+    return _outputDirectory;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1230')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/GenerationResultZip.java: 62-73
+</a>
+<div class="mid" id="frag1230" style="display:none"><pre>
+  private String cleanDirectoryPath(String outputDirectory) {
+    String _outputDirectory = outputDirectory;
+    if (outputDirectory.charAt(outputDirectory.length() - 1) == '/') {
+      _outputDirectory = outputDirectory.substring(0, outputDirectory.length() - 1);
+    }
+
+    if (_outputDirectory.charAt(0) == '/') {
+      _outputDirectory = _outputDirectory.substring(1);
+    }
+
+    return _outputDirectory;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 51:</b> &nbsp; 2 fragments, nominal size 9 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1090')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/GenerationResultZip.java: 79-87
+</a>
+<div class="mid" id="frag1090" style="display:none"><pre>
+  public byte[] getContent() {
+    try {
+      zos.close();
+      baos.close();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    return baos.toByteArray();
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1231')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/api/GenerationResultZip.java: 76-84
+</a>
+<div class="mid" id="frag1231" style="display:none"><pre>
+  public byte[] getContent() {
+    try {
+      zos.close();
+      baos.close();
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    return baos.toByteArray();
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 52:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1098')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/javatemplates/ValueMapper.java: 33-43
+</a>
+<div class="mid" id="frag1098" style="display:none"><pre>
+  public static String mapSimpleDatatype(PrimitiveType type) {
+    if (type.compareTo(PrimitiveType.STRING) == 0) {
+      return "String";
+    } else if (type.compareTo(PrimitiveType.DATETIME) == 0) {
+      return "java.util.Date";
+    } else if (type.compareTo(PrimitiveType.BASE64_BINARY) == 0) {
+      return "byte[]";
+    } else {
+      return type.getLiteral();
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1500')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-templates-java/src/main/java/org/eclipse/vorto/codegen/templates/java/utils/ValueMapper.java: 37-47
+</a>
+<div class="mid" id="frag1500" style="display:none"><pre>
+  public static String mapSimpleDatatype(PrimitiveType type) {
+    if (type.compareTo(PrimitiveType.STRING) == 0) {
+      return "String";
+    } else if (type.compareTo(PrimitiveType.DATETIME) == 0) {
+      return "java.util.Date";
+    } else if (type.compareTo(PrimitiveType.BASE64_BINARY) == 0) {
+      return "byte[]";
+    } else {
+      return type.getLiteral();
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 53:</b> &nbsp; 2 fragments, nominal size 27 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1099')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/generator/utils/javatemplates/ValueMapper.java: 45-64
+</a>
+<div class="mid" id="frag1099" style="display:none"><pre>
+  public static String getInitialValue(PrimitiveType type) {
+    if (type.compareTo(PrimitiveType.STRING) == 0) {
+      return "\"\"";
+    } else if (type.compareTo(PrimitiveType.BOOLEAN) == 0) {
+      return "false";
+    } else if (type.compareTo(PrimitiveType.INT) == 0) {
+      return "0";
+    } else if (type.compareTo(PrimitiveType.FLOAT) == 0) {
+      return "0.0f";
+    } else if (type.compareTo(PrimitiveType.DOUBLE) == 0) {
+      return "0.0d";
+    } else if (type.compareTo(PrimitiveType.DATETIME) == 0) {
+      return "new java.util.Date()";
+    } else if (type.compareTo(PrimitiveType.SHORT) == 0) {
+      return "0";
+    } else if (type.compareTo(PrimitiveType.BASE64_BINARY) == 0) {
+      return "null";
+    }
+    return "";
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1501')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-templates-java/src/main/java/org/eclipse/vorto/codegen/templates/java/utils/ValueMapper.java: 49-68
+</a>
+<div class="mid" id="frag1501" style="display:none"><pre>
+  public static String getInitialValue(PrimitiveType type) {
+    if (type.compareTo(PrimitiveType.STRING) == 0) {
+      return "\"\"";
+    } else if (type.compareTo(PrimitiveType.BOOLEAN) == 0) {
+      return "false";
+    } else if (type.compareTo(PrimitiveType.INT) == 0) {
+      return "0";
+    } else if (type.compareTo(PrimitiveType.FLOAT) == 0) {
+      return "0.0f";
+    } else if (type.compareTo(PrimitiveType.DOUBLE) == 0) {
+      return "0.0d";
+    } else if (type.compareTo(PrimitiveType.DATETIME) == 0) {
+      return "new java.util.Date()";
+    } else if (type.compareTo(PrimitiveType.SHORT) == 0) {
+      return "0";
+    } else if (type.compareTo(PrimitiveType.BASE64_BINARY) == 0) {
+      return "null";
+    }
+    return "";
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 54:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1150')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/utils/ApiGatewayResponse.java: 34-39
+</a>
+<div class="mid" id="frag1150" style="display:none"><pre>
+  public ApiGatewayResponse(int statusCode, String body, Map&lt;String, String&gt; headers, boolean isBase64Encoded) {
+      this.statusCode = statusCode;
+      this.body = body;
+      this.headers = headers;
+      this.isBase64Encoded = isBase64Encoded;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1369')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/ApiGatewayResponse.java: 33-38
+</a>
+<div class="mid" id="frag1369" style="display:none"><pre>
+  public ApiGatewayResponse(int statusCode, String body, Map&lt;String, String&gt; headers, boolean isBase64Encoded) {
+      this.statusCode = statusCode;
+      this.body = body;
+      this.headers = headers;
+      this.isBase64Encoded = isBase64Encoded;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 55:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1161')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/utils/ApiGatewayResponse.java: 99-103
+</a>
+<div class="mid" id="frag1161" style="display:none"><pre>
+      public Builder setBinaryBody(byte[] binaryBody) {
+          this.binaryBody = binaryBody;
+          setBase64Encoded(true);
+          return this;
+      }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1379')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/ApiGatewayResponse.java: 93-97
+</a>
+<div class="mid" id="frag1379" style="display:none"><pre>
+      public Builder setBinaryBody(byte[] binaryBody) {
+          this.binaryBody = binaryBody;
+          setBase64Encoded(true);
+          return this;
+      }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 56:</b> &nbsp; 2 fragments, nominal size 18 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1163')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/utils/ApiGatewayResponse.java: 110-125
+</a>
+<div class="mid" id="frag1163" style="display:none"><pre>
+      public ApiGatewayResponse build() {
+          String body = null;
+          if (rawBody != null) {
+              body = rawBody;
+          } else if (objectBody != null) {
+              try {
+                  body = objectMapper.writeValueAsString(objectBody);
+              } catch (JsonProcessingException e) {
+                  LOG.error("could not serialize object to json", e);
+                  throw new RuntimeException(e);
+              }
+          } else if (binaryBody != null) {
+              body = new String(Base64.getEncoder().encode(binaryBody), StandardCharsets.UTF_8);
+          }
+          return new ApiGatewayResponse(statusCode, body, headers, base64Encoded);
+      }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1381')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/ApiGatewayResponse.java: 104-119
+</a>
+<div class="mid" id="frag1381" style="display:none"><pre>
+      public ApiGatewayResponse build() {
+          String body = null;
+          if (rawBody != null) {
+              body = rawBody;
+          } else if (objectBody != null) {
+              try {
+                  body = objectMapper.writeValueAsString(objectBody);
+              } catch (JsonProcessingException e) {
+                  LOG.error("could not serialize object to json", e);
+                  throw new RuntimeException(e);
+              }
+          } else if (binaryBody != null) {
+              body = new String(Base64.getEncoder().encode(binaryBody), StandardCharsets.UTF_8);
+          }
+          return new ApiGatewayResponse(statusCode, body, headers, base64Encoded);
+      }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 57:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1164')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/utils/Utils.java: 29-37
+</a>
+<div class="mid" id="frag1164" style="display:none"><pre>
+	public static InformationModel toInformationModel(Model model) {
+		if (model instanceof InformationModel) {
+			return (InformationModel) model;
+		} else if (model instanceof FunctionblockModel) {
+			return Utils.wrapFunctionBlock((FunctionblockModel) model);
+		} else {
+			throw new UnsupportedOperationException("model must either be a information- or function block model");
+		}
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1398')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/Utils.java: 41-50
+</a>
+<div class="mid" id="frag1398" style="display:none"><pre>
+  public static InformationModel toInformationModel(Model model) {
+    if (model instanceof InformationModel) {
+      return (InformationModel) model;
+    } else if (model instanceof FunctionblockModel) {
+      return Utils.wrapFunctionBlock((FunctionblockModel) model);
+    } else {
+      throw new UnsupportedOperationException(
+          "model must either be a information- or function block model");
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 58:</b> &nbsp; 2 fragments, nominal size 18 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1165')" href="javascript:;">
+vorto/plugin-sdk/plugin-api/src/main/java/org/eclipse/vorto/plugin/utils/Utils.java: 39-58
+</a>
+<div class="mid" id="frag1165" style="display:none"><pre>
+	public static InformationModel wrapFunctionBlock(FunctionblockModel fbModel) {
+		InformationModel infomodel = InformationModelFactory.eINSTANCE.createInformationModel();
+		infomodel.setCategory(fbModel.getCategory());
+		infomodel.setDescription(fbModel.getDescription());
+		infomodel.setDisplayname(fbModel.getDisplayname());
+		infomodel.setName(fbModel.getName() + "IM");
+		infomodel.setNamespace(fbModel.getNamespace());
+		infomodel.setVersion(fbModel.getVersion());
+
+		FunctionblockProperty property = InformationModelFactory.eINSTANCE.createFunctionblockProperty();
+		property.setType(fbModel);
+		property.setName(fbModel.getName().toLowerCase());
+		infomodel.getProperties().add(property);
+
+		ModelReference reference = ModelFactory.eINSTANCE.createModelReference();
+		reference.setImportedNamespace(fbModel.getNamespace() + "." + fbModel.getName());
+		reference.setVersion(fbModel.getVersion());
+		infomodel.getReferences().add(reference);
+		return infomodel;
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1399')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-api/src/main/java/org/eclipse/vorto/codegen/utils/Utils.java: 52-72
+</a>
+<div class="mid" id="frag1399" style="display:none"><pre>
+  public static InformationModel wrapFunctionBlock(FunctionblockModel fbModel) {
+    InformationModel infomodel = InformationModelFactory.eINSTANCE.createInformationModel();
+    infomodel.setCategory(fbModel.getCategory());
+    infomodel.setDescription(fbModel.getDescription());
+    infomodel.setDisplayname(fbModel.getDisplayname());
+    infomodel.setName(fbModel.getName() + "IM");
+    infomodel.setNamespace(fbModel.getNamespace());
+    infomodel.setVersion(fbModel.getVersion());
+
+    FunctionblockProperty property =
+        InformationModelFactory.eINSTANCE.createFunctionblockProperty();
+    property.setType(fbModel);
+    property.setName(fbModel.getName().toLowerCase());
+    infomodel.getProperties().add(property);
+
+    ModelReference reference = ModelFactory.eINSTANCE.createModelReference();
+    reference.setImportedNamespace(fbModel.getNamespace() + "." + fbModel.getName());
+    reference.setVersion(fbModel.getVersion());
+    infomodel.getReferences().add(reference);
+    return infomodel;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 59:</b> &nbsp; 2 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1468')" href="javascript:;">
+vorto/plugin-sdk/plugin-generator/generator-runner-spi/src/main/java/org/eclipse/vorto/codegen/spi/service/ServerGeneratorLookup.java: 58-65
+</a>
+<div class="mid" id="frag1468" style="display:none"><pre>
+    private String extractFileNameFromHeader(ResponseEntity&lt;byte[]&gt; entity) {
+      List&lt;String&gt; values = entity.getHeaders().get("content-disposition");
+      if (values.size() &gt; 0) {
+        int indexOfFileNameStart = values.get(0).indexOf("=");
+        return values.get(0).substring(indexOfFileNameStart + 1);
+      }
+      return "generated.output";
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2783')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/plugin/generator/impl/DefaultGeneratorPluginService.java: 263-270
+</a>
+<div class="mid" id="frag2783" style="display:none"><pre>
+  private String extractFileNameFromHeader(ResponseEntity&lt;byte[]&gt; entity) {
+    List&lt;String&gt; values = entity.getHeaders().get("content-disposition");
+    if (values.size() &gt; 0) {
+      int indexOfFileNameStart = values.get(0).indexOf("=");
+      return values.get(0).substring(indexOfFileNameStart + 1);
+    }
+    return "generated.output";
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 60:</b> &nbsp; 3 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1534')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/attachment/Tag.java: 49-55
+</a>
+<div class="mid" id="frag1534" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((label == null) ? 0 : label.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4375')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/attachment/Tag.java: 48-54
+</a>
+<div class="mid" id="frag4375" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((label == null) ? 0 : label.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2318')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/core/Tag.java: 55-61
+</a>
+<div class="mid" id="frag2318" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((label == null) ? 0 : label.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 61:</b> &nbsp; 3 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1535')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/attachment/Tag.java: 58-77
+</a>
+<div class="mid" id="frag1535" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Tag other = (Tag) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    if (label == null) {
+      if (other.label != null)
+        return false;
+    } else if (!label.equals(other.label))
+      return false;
+    return true;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4376')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/attachment/Tag.java: 57-76
+</a>
+<div class="mid" id="frag4376" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Tag other = (Tag) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    if (label == null) {
+      if (other.label != null)
+        return false;
+    } else if (!label.equals(other.label))
+      return false;
+    return true;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2319')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/core/Tag.java: 64-83
+</a>
+<div class="mid" id="frag2319" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Tag other = (Tag) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    if (label == null) {
+      if (other.label != null)
+        return false;
+    } else if (!label.equals(other.label))
+      return false;
+    return true;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 62:</b> &nbsp; 3 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1668')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/generation/GeneratedOutput.java: 29-33
+</a>
+<div class="mid" id="frag1668" style="display:none"><pre>
+  public GeneratedOutput(byte[] content, String fileName, long size) {
+    this.content = content;
+    this.fileName = fileName;
+    this.size = size;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4377')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/generation/GeneratedOutput.java: 28-32
+</a>
+<div class="mid" id="frag4377" style="display:none"><pre>
+  public GeneratedOutput(byte[] content, String fileName, long size) {
+    this.content = content;
+    this.fileName = fileName;
+    this.size = size;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2741')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/plugin/generator/GeneratedOutput.java: 29-33
+</a>
+<div class="mid" id="frag2741" style="display:none"><pre>
+  public GeneratedOutput(byte[] content, String fileName, long size) {
+    this.content = content;
+    this.fileName = fileName;
+    this.size = size;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 63:</b> &nbsp; 3 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1738')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelInfo.java: 110-116
+</a>
+<div class="mid" id="frag1738" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4468')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/ModelInfo.java: 112-118
+</a>
+<div class="mid" id="frag4468" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2260')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/core/ModelInfo.java: 130-136
+</a>
+<div class="mid" id="frag2260" style="display:none"><pre>
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((type == null) ? 0 : type.hashCode());
+    return result;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 64:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1739')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelInfo.java: 119-134
+</a>
+<div class="mid" id="frag1739" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ModelInfo other = (ModelInfo) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+
+    return (type == other.type);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4469')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/ModelInfo.java: 121-136
+</a>
+<div class="mid" id="frag4469" style="display:none"><pre>
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ModelInfo other = (ModelInfo) obj;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+
+    return (type == other.type);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 65:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1740')" href="javascript:;">
+vorto/repository/repository-api/src/main/java/org/eclipse/vorto/repository/api/ModelInfo.java: 136-140
+</a>
+<div class="mid" id="frag1740" style="display:none"><pre>
+  public void addPlatformMapping(String targetPlatform, ModelId mappingId) {
+    if (targetPlatform != null &amp;&amp; !targetPlatform.equals("")) {
+      this.platformMappings.put(targetPlatform, mappingId);
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4470')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/ModelInfo.java: 138-142
+</a>
+<div class="mid" id="frag4470" style="display:none"><pre>
+  public void addPlatformMapping(String targetPlatform, ModelId mappingId) {
+    if (targetPlatform != null &amp;&amp; !targetPlatform.equals("")) {
+      this.platformMappings.put(targetPlatform, mappingId);
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 66:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1763')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/account/impl/DefaultUserAccountService.java: 122-129
+</a>
+<div class="mid" id="frag1763" style="display:none"><pre>
+  public boolean exists(UserDto user) {
+    try {
+      return cache.withUser(user).getUser() != null;
+    }
+    catch (DoesNotExistException dnee) {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2975')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/services/UserService.java: 327-334
+</a>
+<div class="mid" id="frag2975" style="display:none"><pre>
+  public boolean exists(UserDto user) {
+    try {
+      return cache.withUser(user).getUser() != null;
+    }
+    catch (DoesNotExistException dnee) {
+      return false;
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 67:</b> &nbsp; 2 fragments, nominal size 16 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2050')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/core/impl/parser/AbstractModelParser.java: 224-243
+</a>
+<div class="mid" id="frag2050" style="display:none"><pre>
+  private Optional&lt;Resource&gt; createResource(String fileName, byte[] fileContent,
+      XtextResourceSet resourceSet) {
+    Objects.requireNonNull(fileName);
+    Objects.requireNonNull(fileContent);
+    Objects.requireNonNull(resourceSet);
+
+    String filename = "file-" + UUID.randomUUID().toString().replace("-", "") + "-" + fileName;
+
+    Resource resource = resourceSet.createResource(URI.createURI("dummy:/" + filename));
+    if (resource != null) {
+      try {
+        resource.load(new ByteArrayInputStream(fileContent), resourceSet.getLoadOptions());
+        return Optional.of(resource);
+      } catch (IOException e) {
+        throw new ValidationException(e.getMessage(), null);
+      }
+    }
+
+    return Optional.empty();
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2066')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/core/impl/parser/LocalModelWorkspace.java: 91-110
+</a>
+<div class="mid" id="frag2066" style="display:none"><pre>
+  private Optional&lt;Resource&gt; createResource(String fileName, byte[] fileContent,
+      XtextResourceSet resourceSet) {
+    Objects.requireNonNull(fileName);
+    Objects.requireNonNull(fileContent);
+    Objects.requireNonNull(resourceSet);
+
+    String filename = "file-" + UUID.randomUUID().toString().replace("-", "") + "-" + fileName;
+
+    Resource resource = resourceSet.createResource(URI.createURI("dummy:/" + filename));
+    if (resource != null) {
+      try {
+        resource.load(new ByteArrayInputStream(fileContent), resourceSet.getLoadOptions());
+        return Optional.of(resource);
+      } catch (IOException e) {
+        throw new ValidationException(e.getMessage(), null);
+      }
+    }
+
+    return Optional.empty();
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 68:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag2648')" href="javascript:;">
+vorto/repository/repository-core/src/main/java/org/eclipse/vorto/repository/oauth/AbstractOAuthProvider.java: 84-99
+</a>
+<div class="mid" id="frag2648" style="display:none"><pre>
+  protected OAuth2Authentication createAuthentication(String clientId, String userId, String name, 
+      String email, Set&lt;IRole&gt; roles) {
+    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+        name, "N/A", SpringUserUtils.toAuthorityList(roles));
+
+    Map&lt;String, Object&gt; detailsMap = new HashMap&lt;&gt;();
+    detailsMap.put(JWT_SUB, userId);
+    detailsMap.put(JWT_NAME, name);
+    detailsMap.put(JWT_EMAIL, email);
+    authToken.setDetails(detailsMap);
+    
+    OAuth2Request request =
+        new OAuth2Request(null, clientId, null, true, null, null, null, null, null);
+
+    return new OAuth2Authentication(request, authToken);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4528')" href="javascript:;">
+vorto/repository/repository-oauth-boschid/src/main/java/org/eclipse/vorto/repository/oauth/BoschIoTSuiteOAuthProviderAuthCode.java: 195-210
+</a>
+<div class="mid" id="frag4528" style="display:none"><pre>
+  protected OAuth2Authentication createAuthentication(String clientId, String userId, String name,
+      String email, Set&lt;IRole&gt; roles) {
+    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+        name, "N/A", SpringUserUtils.toAuthorityList(roles));
+
+    Map&lt;String, Object&gt; detailsMap = new HashMap&lt;&gt;();
+    detailsMap.put(JWT_SUB, userId);
+    detailsMap.put(JWT_NAME, name);
+    detailsMap.put(JWT_EMAIL, email);
+    authToken.setDetails(detailsMap);
+
+    OAuth2Request request =
+        new OAuth2Request(null, clientId, null, true, null, null, null, null, null);
+
+    return new OAuth2Authentication(request, authToken);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 69:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3723')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/NameSearchSimpleTest.java: 36-41
+</a>
+<div class="mid" id="frag3723" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    testInfrastructure = new SearchTestInfrastructure();
+    testInfrastructure.importModel("Color.type");
+    // "control group": extraneous model that should never appear in search
+    testInfrastructure.importModel("HueLightStrips.infomodel");
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4117')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/NameSearchSimpleTest.java: 35-40
+</a>
+<div class="mid" id="frag4117" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    testInfrastructure = new SearchTestInfrastructure();
+    testInfrastructure.importModel("Color.type");
+    // "control group": extraneous model that should never appear in search
+    testInfrastructure.importModel("HueLightStrips.infomodel");
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 70:</b> &nbsp; 2 fragments, nominal size 6 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3753')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/NamespaceSearchSimpleTest.java: 36-46
+</a>
+<div class="mid" id="frag3753" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+
+    testInfrastructure = new SearchTestInfrastructure();
+    
+    // Switcher fb with namespace com.mycompany.fb
+    testInfrastructure.importModel(testInfrastructure.FUNCTIONBLOCK_MODEL);
+    // ColorLight im with namespace com.mycompany
+    testInfrastructure.importModel(testInfrastructure.INFORMATION_MODEL);
+    // ColorLight ios mapping with very different namespace org.eclipse.vorto.examples.type
+    testInfrastructure.importModel(testInfrastructure.MAPPING_MODEL);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4147')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/NamespaceSearchSimpleTest.java: 35-45
+</a>
+<div class="mid" id="frag4147" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+
+    testInfrastructure = new SearchTestInfrastructure();
+
+    // Switcher fb with namespace com.mycompany.fb
+    testInfrastructure.importModel(testInfrastructure.FUNCTIONBLOCK_MODEL);
+    // ColorLight im with namespace com.mycompany
+    testInfrastructure.importModel(testInfrastructure.INFORMATION_MODEL);
+    // ColorLight ios mapping with very different namespace org.eclipse.vorto.examples.type
+    testInfrastructure.importModel(testInfrastructure.MAPPING_MODEL);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 71:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3768')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/SearchTestInfrastructure.java: 469-475
+</a>
+<div class="mid" id="frag3768" style="display:none"><pre>
+  private Namespace mockNamespace() {
+    Namespace namespace = new Namespace();
+    namespace.setName("org.eclipse.vorto");
+    namespace.setId(1L);
+    namespace.setWorkspaceId("playground");
+    return namespace;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4178')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/SearchTestInfrastructure.java: 670-676
+</a>
+<div class="mid" id="frag4178" style="display:none"><pre>
+  private Namespace mockNamespace() {
+    Namespace namespace = new Namespace();
+    namespace.setName("org.eclipse.vorto");
+    namespace.setId(1L);
+    namespace.setWorkspaceId("playground");
+    return namespace;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 72:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3772')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/SearchTestInfrastructure.java: 489-497
+</a>
+<div class="mid" id="frag3772" style="display:none"><pre>
+  protected Authentication createAuthenticationToken(String username) {
+    if (username.equalsIgnoreCase("admin")) {
+      return new TestingAuthenticationToken(username, username, RepositoryRole.SYS_ADMIN.getName());
+    }
+    Collection&lt;IRole&gt; roles = Sets.newHashSet(RoleProvider.modelReviewer());
+
+    return new TestingAuthenticationToken(username, username,
+        roles.stream().map(IRole::getName).toArray(String[]::new));
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4013')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/UnitTestBase.java: 558-566
+</a>
+<div class="mid" id="frag4013" style="display:none"><pre>
+  protected Authentication createAuthenticationToken(String username) {
+    if (username.equalsIgnoreCase("admin")) {
+      return new TestingAuthenticationToken(username, username, RepositoryRole.SYS_ADMIN.getName());
+    }
+    Collection&lt;IRole&gt; roles = Sets.newHashSet(RoleProvider.modelReviewer());
+
+    return new TestingAuthenticationToken(username, username,
+        roles.stream().map(IRole::getName).toArray(String[]::new));
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 73:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3773')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/SearchTestInfrastructure.java: 512-516
+</a>
+<div class="mid" id="frag3773" style="display:none"><pre>
+  protected IUserContext createUserContext(String username, String workspaceId) {
+    Authentication authentication = createAuthenticationToken(username);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    return UserContext.user(authentication, workspaceId);
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4167')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/SearchTestInfrastructure.java: 575-579
+</a>
+<div class="mid" id="frag4167" style="display:none"><pre>
+  protected IUserContext createUserContext(String username, String workspaceId) {
+    Authentication authentication = createAuthenticationToken(username);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    return UserContext.user(authentication, workspaceId);
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 74:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3776')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/SearchTestInfrastructure.java: 526-545
+</a>
+<div class="mid" id="frag3776" style="display:none"><pre>
+  protected ModelInfo importModel(String modelName, IUserContext userContext) {
+    try {
+      UploadModelResult uploadResult = importer.upload(
+          FileUpload.create(modelName,
+              IOUtils.toByteArray(
+                  new ClassPathResource("sample_models/" + modelName).getInputStream())),
+          Context.create(userContext, Optional.empty()));
+      return importer
+          .doImport(uploadResult.getHandleId(), Context.create(userContext, Optional.empty()))
+          .get(0);
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    } finally {
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4170')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/SearchTestInfrastructure.java: 589-608
+</a>
+<div class="mid" id="frag4170" style="display:none"><pre>
+  protected ModelInfo importModel(String modelName, IUserContext userContext) {
+    try {
+      UploadModelResult uploadResult = importer.upload(
+          FileUpload.create(modelName,
+              IOUtils.toByteArray(
+                  new ClassPathResource("sample_models/" + modelName).getInputStream())),
+          Context.create(userContext, Optional.empty()));
+      return importer
+          .doImport(uploadResult.getHandleId(), Context.create(userContext, Optional.empty()))
+          .get(0);
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
+    } finally {
+      try {
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 75:</b> &nbsp; 3 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3779')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/SearchTestInfrastructure.java: 560-567
+</a>
+<div class="mid" id="frag3779" style="display:none"><pre>
+    public void publishEvent(ApplicationEvent event) {
+      if (event instanceof AppEvent) {
+        AppEvent appEvent = (AppEvent) event;
+        for (ApplicationListener&lt;AppEvent&gt; listener : listeners) {
+          listener.onApplicationEvent(appEvent);
+        }
+      }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4025')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/MockAppEventPublisher.java: 31-38
+</a>
+<div class="mid" id="frag4025" style="display:none"><pre>
+    public void publishEvent(ApplicationEvent event) {
+        if (event instanceof AppEvent) {
+            AppEvent appEvent = (AppEvent) event;
+            for(ApplicationListener&lt;AppEvent&gt; listener : listeners) {
+                listener.onApplicationEvent(appEvent);
+            }
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4173')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/SearchTestInfrastructure.java: 623-630
+</a>
+<div class="mid" id="frag4173" style="display:none"><pre>
+    public void publishEvent(ApplicationEvent event) {
+      if (event instanceof AppEvent) {
+        AppEvent appEvent = (AppEvent) event;
+        for (ApplicationListener&lt;AppEvent&gt; listener : listeners) {
+          listener.onApplicationEvent(appEvent);
+        }
+      }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 76:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3815')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/TypeSearchSimpleTest.java: 41-56
+</a>
+<div class="mid" id="frag3815" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    testInfrastructure = new SearchTestInfrastructure();
+    // importing one model for each supported type here
+    // function block
+    testInfrastructure.importModel(testInfrastructure.FUNCTIONBLOCK_MODEL);
+
+    // info model
+    testInfrastructure.importModel(testInfrastructure.INFORMATION_MODEL);
+
+    // data type
+    testInfrastructure.importModel(testInfrastructure.DATATYPE_MODEL);
+
+    // mapping
+    testInfrastructure.importModel(testInfrastructure.MAPPING_MODEL);
+
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4197')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/TypeSearchSimpleTest.java: 36-52
+</a>
+<div class="mid" id="frag4197" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    testInfrastructure = new SearchTestInfrastructure();
+
+    // importing one model for each supported type here
+    // function block
+    testInfrastructure.importModel(testInfrastructure.FUNCTIONBLOCK_MODEL);
+
+    // info model
+    testInfrastructure.importModel(testInfrastructure.INFORMATION_MODEL);
+
+    // data type
+    testInfrastructure.importModel(testInfrastructure.DATATYPE_MODEL);
+
+    // mapping
+    testInfrastructure.importModel(testInfrastructure.MAPPING_MODEL);
+
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 77:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag3870')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/core/search/VisibilitySearchSimpleTest.java: 37-51
+</a>
+<div class="mid" id="frag3870" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    testInfrastructure = new SearchTestInfrastructure();
+    testInfrastructure.importModel(testInfrastructure.DATATYPE_MODEL);
+    List&lt;ModelInfo&gt; model = testInfrastructure.getRepositoryFactory().getRepository( testInfrastructure.createUserContext("alex")).search("*");
+    // this is arguably over-cautious, as the next statement would fail all tests anyway
+    if (model.isEmpty()) {
+      fail("Model is empty after importing.");
+    }
+    // "alex" user updates the only imported model's visibility to public
+    ModelId updated =  testInfrastructure.getRepositoryFactory().getRepository( testInfrastructure.createUserContext("alex"))
+        .updateVisibility(model.get(0).getId(), "Public");
+
+    // importing another model as private
+     testInfrastructure.importModel( testInfrastructure.INFORMATION_MODEL,  testInfrastructure.createUserContext("alex", "playground"));
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4258')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/VisibilitySearchSimpleTest.java: 35-54
+</a>
+<div class="mid" id="frag4258" style="display:none"><pre>
+  public static void beforeClass() throws Exception {
+    
+    testInfrastructure = new SearchTestInfrastructure();
+    
+    testInfrastructure.importModel(testInfrastructure.DATATYPE_MODEL);
+    List&lt;ModelInfo&gt; model = testInfrastructure.getRepositoryFactory()
+        .getRepository(testInfrastructure.createUserContext("alex")).search("*");
+    // this is arguably over-cautious, as the next statement would fail all tests anyway
+    if (model.isEmpty()) {
+      fail("Model is empty after importing.");
+    }
+    // "alex" user updates the only imported model's visibility to public
+    ModelId updated = testInfrastructure.getRepositoryFactory()
+        .getRepository(testInfrastructure.createUserContext("alex"))
+        .updateVisibility(model.get(0).getId(), "Public");
+
+    // importing another model as private
+    testInfrastructure.importModel(testInfrastructure.INFORMATION_MODEL,
+        testInfrastructure.createUserContext("alex", "playground"));
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 78:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4029')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 19-25
+</a>
+<div class="mid" id="frag4029" style="display:none"><pre>
+    public static NamespaceRole namespaceAdmin() {
+        NamespaceRole namespace_admin = new NamespaceRole();
+        namespace_admin.setName("namespace_admin");
+        namespace_admin.setPrivileges(7);
+        namespace_admin.setRole(32);
+        return namespace_admin;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4240')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 19-25
+</a>
+<div class="mid" id="frag4240" style="display:none"><pre>
+  public static NamespaceRole namespaceAdmin() {
+    NamespaceRole namespace_admin = new NamespaceRole();
+    namespace_admin.setName("namespace_admin");
+    namespace_admin.setPrivileges(7);
+    namespace_admin.setRole(32);
+    return namespace_admin;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 79:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4030')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 27-33
+</a>
+<div class="mid" id="frag4030" style="display:none"><pre>
+    public static NamespaceRole modelViewer() {
+        NamespaceRole model_viewer = new NamespaceRole();
+        model_viewer.setName("model_viewer");
+        model_viewer.setPrivileges(1);
+        model_viewer.setRole(1);
+        return model_viewer;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4241')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 27-33
+</a>
+<div class="mid" id="frag4241" style="display:none"><pre>
+  public static NamespaceRole modelViewer() {
+    NamespaceRole model_viewer = new NamespaceRole();
+    model_viewer.setName("model_viewer");
+    model_viewer.setPrivileges(1);
+    model_viewer.setRole(1);
+    return model_viewer;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 80:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4031')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 35-41
+</a>
+<div class="mid" id="frag4031" style="display:none"><pre>
+    public static NamespaceRole modelCreator() {
+        NamespaceRole model_creator = new NamespaceRole();
+        model_creator.setName("model_creator");
+        model_creator.setPrivileges(3);
+        model_creator.setRole(2);
+        return model_creator;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4242')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 35-41
+</a>
+<div class="mid" id="frag4242" style="display:none"><pre>
+  public static NamespaceRole modelCreator() {
+    NamespaceRole model_creator = new NamespaceRole();
+    model_creator.setName("model_creator");
+    model_creator.setPrivileges(3);
+    model_creator.setRole(2);
+    return model_creator;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 81:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4032')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 43-49
+</a>
+<div class="mid" id="frag4032" style="display:none"><pre>
+    public static NamespaceRole modelPromoter() {
+        NamespaceRole model_promoter = new NamespaceRole();
+        model_promoter.setName("model_promoter");
+        model_promoter.setPrivileges(3);
+        model_promoter.setRole(4);
+        return model_promoter;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4243')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 43-49
+</a>
+<div class="mid" id="frag4243" style="display:none"><pre>
+  public static NamespaceRole modelPromoter() {
+    NamespaceRole model_promoter = new NamespaceRole();
+    model_promoter.setName("model_promoter");
+    model_promoter.setPrivileges(3);
+    model_promoter.setRole(4);
+    return model_promoter;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 82:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4033')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 51-57
+</a>
+<div class="mid" id="frag4033" style="display:none"><pre>
+    public static NamespaceRole modelPublisher() {
+        NamespaceRole model_publisher = new NamespaceRole();
+        model_publisher.setName("model_publisher");
+        model_publisher.setPrivileges(3);
+        model_publisher.setRole(4);
+        return model_publisher;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4244')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 51-57
+</a>
+<div class="mid" id="frag4244" style="display:none"><pre>
+  public static NamespaceRole modelPublisher() {
+    NamespaceRole model_publisher = new NamespaceRole();
+    model_publisher.setName("model_publisher");
+    model_publisher.setPrivileges(3);
+    model_publisher.setRole(4);
+    return model_publisher;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 83:</b> &nbsp; 2 fragments, nominal size 7 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4034')" href="javascript:;">
+vorto/repository/repository-core/src/test/java/org/eclipse/vorto/repository/utils/RoleProvider.java: 59-65
+</a>
+<div class="mid" id="frag4034" style="display:none"><pre>
+    public static NamespaceRole modelReviewer() {
+        NamespaceRole model_reviewer = new NamespaceRole();
+        model_reviewer.setName("model_reviewer");
+        model_reviewer.setPrivileges(3);
+        model_reviewer.setRole(8);
+        return model_reviewer;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4245')" href="javascript:;">
+vorto/repository/repository-elasticsearch/src/test/java/org/eclipse/vorto/repository/search/utils/RoleProvider.java: 59-65
+</a>
+<div class="mid" id="frag4245" style="display:none"><pre>
+  public static NamespaceRole modelReviewer() {
+    NamespaceRole model_reviewer = new NamespaceRole();
+    model_reviewer.setName("model_reviewer");
+    model_reviewer.setPrivileges(3);
+    model_reviewer.setRole(8);
+    return model_reviewer;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 84:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4313')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/api/impl/DefaultModelGeneration.java: 89-99
+</a>
+<div class="mid" id="frag4313" style="display:none"><pre>
+	private GeneratedOutput getGeneratedOutput(HttpResponse response) {
+		try {
+			String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
+			String filename = contentDisposition.substring(contentDisposition.indexOf("filename = ") + "filename = ".length());
+			long length = response.getEntity().getContentLength();
+			byte[] content = IOUtils.toByteArray(response.getEntity().getContent());
+			return new GeneratedOutput(content, filename, length);
+		} catch (IOException e) {
+			throw new RepositoryClientException("Error in converting response to GeneratedOutput", e);
+		}
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4427')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/impl/DefaultRepositoryClient.java: 150-161
+</a>
+<div class="mid" id="frag4427" style="display:none"><pre>
+  private GeneratedOutput getGeneratedOutput(HttpResponse response) {
+    try {
+      String contentDisposition = response.getFirstHeader("Content-Disposition").getValue();
+      String filename = contentDisposition
+          .substring(contentDisposition.indexOf("filename = ") + "filename = ".length());
+      long length = response.getEntity().getContentLength();
+      byte[] content = IOUtils.toByteArray(response.getEntity().getContent());
+      return new GeneratedOutput(content, filename, length);
+    } catch (IOException e) {
+      throw new RepositoryClientException("Error in converting response to GeneratedOutput", e);
+    }
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 85:</b> &nbsp; 2 fragments, nominal size 9 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4327')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/api/impl/ImplementationBase.java: 77-85
+</a>
+<div class="mid" id="frag4327" style="display:none"><pre>
+	protected &lt;K&gt; Function&lt;HttpResponse, K&gt; transformToType(Type type) {
+		return response -&gt; {
+			try {
+				return gson.fromJson(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), type);
+			} catch (IOException | JsonSyntaxException e) {
+				throw new RepositoryClientException("Error in converting result to " + type.getTypeName(), e);
+			}
+		};
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4435')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/impl/ImplementationBase.java: 168-177
+</a>
+<div class="mid" id="frag4435" style="display:none"><pre>
+  protected &lt;K&gt; Function&lt;HttpResponse, K&gt; transformToType(Type type) {
+    return response -&gt; {
+      try {
+        return gson.fromJson(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), type);
+      } catch (IOException | JsonSyntaxException e) {
+        throw new RepositoryClientException("Error in converting result to " + type.getTypeName(),
+            e);
+      }
+    };
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 86:</b> &nbsp; 2 fragments, nominal size 9 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4328')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/api/impl/ImplementationBase.java: 87-95
+</a>
+<div class="mid" id="frag4328" style="display:none"><pre>
+	protected &lt;K&gt; Function&lt;HttpResponse, K&gt; transformToClass(Class&lt;K&gt; modelClass) {
+		return response -&gt; {
+			try {
+				return gson.fromJson(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), modelClass);
+			} catch (IOException | JsonSyntaxException e) {
+				throw new RepositoryClientException("Error in converting result to " + modelClass.getName(), e);
+			}
+		};
+	}
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4436')" href="javascript:;">
+vorto/repository/repository-java-client/src/main/java/org/eclipse/vorto/repository/client/impl/ImplementationBase.java: 179-189
+</a>
+<div class="mid" id="frag4436" style="display:none"><pre>
+  protected &lt;K&gt; Function&lt;HttpResponse, K&gt; transformToClass(Class&lt;K&gt; modelClass) {
+    return response -&gt; {
+      try {
+        return gson.fromJson(IOUtils.toString(response.getEntity().getContent(), "UTF-8"),
+            modelClass);
+      } catch (IOException | JsonSyntaxException e) {
+        throw new RepositoryClientException("Error in converting result to " + modelClass.getName(),
+            e);
+      }
+    };
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 87:</b> &nbsp; 3 fragments, nominal size 8 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4540')" href="javascript:;">
+vorto/repository/repository-oauth-boschid/src/main/java/org/eclipse/vorto/repository/oauth/BoschIoTSuiteOAuthProviderConfiguration.java: 69-75
+</a>
+<div class="mid" id="frag4540" style="display:none"><pre>
+  private String getBaseUrl(HttpServletRequest request) {
+    if (request.getRequestURI().equals("/") || request.getRequestURI().equals("")) {
+      return request.getRequestURL().toString();
+    } else {
+      return request.getRequestURL().toString().replace(request.getRequestURI(), "");
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4606')" href="javascript:;">
+vorto/repository/repository-oauth-github/src/main/java/org/eclipse/vorto/repository/oauth/GithubOAuthProviderConfiguration.java: 68-74
+</a>
+<div class="mid" id="frag4606" style="display:none"><pre>
+  private String getBaseUrl(HttpServletRequest request) {
+    if (request.getRequestURI().equals("/") || request.getRequestURI().equals("")) {
+      return request.getRequestURL().toString();
+    } else {
+      return request.getRequestURL().toString().replace(request.getRequestURI(), "");
+    }
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4588')" href="javascript:;">
+vorto/repository/repository-oauth-eclipse/src/main/java/org/eclipse/vorto/repository/oauth/EclipseOAuthProviderConfiguration.java: 84-91
+</a>
+<div class="mid" id="frag4588" style="display:none"><pre>
+  private String getBaseUrl(HttpServletRequest request) {
+    if (request.getRequestURI().equals("/") || request.getRequestURI().equals("")) {
+      return request.getRequestURL().toString();
+    } else {
+      return request.getRequestURL().toString().replace(request.getRequestURI(), "");
+    }
+
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 88:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4593')" href="javascript:;">
+vorto/repository/repository-oauth-eclipse/src/main/java/org/eclipse/vorto/repository/oauth/EclipseRepositoryAuthProvider.java: 51-63
+</a>
+<div class="mid" id="frag4593" style="display:none"><pre>
+  public boolean canHandle(Authentication auth) {
+    if (auth == null || !(auth instanceof OAuth2Authentication)) {
+      return false;
+    }
+    
+    OAuth2Authentication oauth2Auth = (OAuth2Authentication) auth;
+    
+    if (oauth2Auth.getOAuth2Request() == null) {
+      return false;
+    }
+    
+    return clientId.equals(oauth2Auth.getOAuth2Request().getClientId());
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4611')" href="javascript:;">
+vorto/repository/repository-oauth-github/src/main/java/org/eclipse/vorto/repository/oauth/GithubRepositoryAuthProvider.java: 47-59
+</a>
+<div class="mid" id="frag4611" style="display:none"><pre>
+  public boolean canHandle(Authentication auth) {
+    if (auth == null || !(auth instanceof OAuth2Authentication)) {
+      return false;
+    }
+    
+    OAuth2Authentication oauth2Auth = (OAuth2Authentication) auth;
+    
+    if (oauth2Auth.getOAuth2Request() == null) {
+      return false;
+    }
+    
+    return clientId.equals(oauth2Auth.getOAuth2Request().getClientId());
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 89:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4596')" href="javascript:;">
+vorto/repository/repository-oauth-eclipse/src/main/java/org/eclipse/vorto/repository/oauth/EclipseRepositoryAuthProvider.java: 78-95
+</a>
+<div class="mid" id="frag4596" style="display:none"><pre>
+  public OAuthUser createUser(Authentication authentication) {
+    OAuthUser user = new OAuthUser();
+    user.setUserId(authentication.getName());
+    user.setDisplayName(authentication.getName());
+
+    if (authentication instanceof OAuth2Authentication) {
+      Authentication userAuthentication = ((OAuth2Authentication)authentication).getUserAuthentication();
+      if (userAuthentication.getDetails() != null &amp;&amp; ((Map)userAuthentication.getDetails()).containsKey("email")) {
+        user.setEmail((String)((Map)userAuthentication.getDetails()).get("email"));
+      }
+    }
+    
+    Set&lt;String&gt; roles = new HashSet&lt;&gt;();
+    authentication.getAuthorities().forEach(e -&gt; roles.add(e.getAuthority()));
+    user.setRoles(roles);
+    
+    return user;
+  }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4614')" href="javascript:;">
+vorto/repository/repository-oauth-github/src/main/java/org/eclipse/vorto/repository/oauth/GithubRepositoryAuthProvider.java: 74-91
+</a>
+<div class="mid" id="frag4614" style="display:none"><pre>
+  public OAuthUser createUser(Authentication authentication) {
+    OAuthUser user = new OAuthUser();
+    user.setUserId(authentication.getName());
+    user.setDisplayName(authentication.getName());
+
+    if (authentication instanceof OAuth2Authentication) {
+      Authentication userAuthentication = ((OAuth2Authentication)authentication).getUserAuthentication();
+      if (userAuthentication.getDetails() != null &amp;&amp; ((Map)userAuthentication.getDetails()).containsKey("email")) {
+        user.setEmail((String)((Map)userAuthentication.getDetails()).get("email"));
+      }
+    }
+    
+    Set&lt;String&gt; roles = new HashSet&lt;&gt;();
+    authentication.getAuthorities().forEach(e -&gt; roles.add(e.getAuthority()));
+    user.setRoles(roles);
+    
+    return user;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 90:</b> &nbsp; 2 fragments, nominal size 5 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4853')" href="javascript:;">
+vorto/repository/repository-server/src/test/java/org/eclipse/vorto/repository/server/ui/MockApplicationSecurity.java: 55-59
+</a>
+<div class="mid" id="frag4853" style="display:none"><pre>
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag4963')" href="javascript:;">
+vorto/repository/repository-server-config/src/main/java/org/eclipse/vorto/repository/server/config/config/SecurityConfiguration.java: 216-220
+</a>
+<div class="mid" id="frag4963" style="display:none"><pre>
+  private CsrfTokenRepository csrfTokenRepository() {
+    HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+    repository.setHeaderName("X-XSRF-TOKEN");
+    return repository;
+  }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<script language="JavaScript">
+function ShowHide(divId) { 
+    if(document.getElementById(divId).style.display == 'none') {
+        document.getElementById(divId).style.display='block';
+    } else { 
+        document.getElementById(divId).style.display = 'none';
+    } 
+}
+</script>
+</body>
+</html>

@@ -8,9 +8,7 @@
 
 3. Maven3.8
 
-4. CodeQL(https://github.com/github/codeql)
-
-5. Python3.8
+4. Python3.8
 
 ## Clone Type Separation
 

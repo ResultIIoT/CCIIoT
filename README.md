@@ -1,6 +1,6 @@
 # CCIIoT: Unveiling Code Clones in the Eclipse IIoT Software Ecosystem
 
-> A research repository containing tools and datasets for detecting and analyzing co-modified code clones
+> A research repository containing tools and datasets for detecting and analyzing code clones in the Eclipse IIoT Software Ecosystem
 
 ## Overview
 

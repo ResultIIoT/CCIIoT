@@ -46,7 +46,7 @@ Data analysis toolkit for processing detection results and generating research i
 Public dataset containing:
 
 - Code clone samples
-- Co-modified patterns
+- Cross project code clone samples
 
 ## Getting Started
 

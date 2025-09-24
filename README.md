@@ -16,8 +16,8 @@ This repository is the public repository for our research paper on co-modified a
 CCIIoT/
 ├── CCDetector-Update/     # Enhanced detection tool based on CCDetector
 ├── AnalysisModule/        # Data analysis and processing tools
-├── dataset/              # Public research dataset
-└── README.md            # This file
+├── dataset/               # Public research dataset
+└── README.md              # This file
 ```
 
 ## Components
@@ -29,7 +29,7 @@ Enhanced code clone detection tool specifically designed for detecting co-modifi
 **Features:**
 
 - Co-modified code clone detection
-- Cross-project co-modified detection
+- Cross-project co-modified code clone detection
 
 ### 2. AnalysisModule
 

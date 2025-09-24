@@ -12,11 +12,10 @@ public class FindCPCoChangeClone {
         run(Input, Output);
     }
 
-    // 本方法，传入Input, OutPut的路径，即可实现，批量对Input中不同项目进行共变处理;
     public static void run(String Input, String Output) throws Exception {
         new File(Output).mkdir();
         long starttime = System.currentTimeMillis();  //时间戳
-//
+
         File input = new File(Input); // 所有项目的输入文件所在处;
         File output = new File(Output); // 所有项目的结果文件所在处;
         if (!output.exists()) output.mkdir();
@@ -59,26 +58,18 @@ public class FindCPCoChangeClone {
                 String subjectwholename2 = projectsList[i].getName();
 
                 String subjectname2 = subjectwholename2.substring(0, subjectwholename2.indexOf('_'));
-//                System.out.println(subjectname2);
+                
                 System.out.println("Start " + subjectname1 + "-------->" + subjectname2);
-//                System.out.println(i);
-//                if (subjectname2.equals("Java-5")) {
-//                    --i;
-//                    System.out.println("Ending " + subjectname1 + "-------->" + subjectname2);
-//                    continue;
-//                }
                 inputf2 = projectsList[i].getAbsolutePath() + File.separator + subjectwholename2 + "-0.30.xml";
                 inputf2c = projectsList[i].getAbsolutePath() + File.separator + subjectwholename2 + "-0.30-classes-withsource.xml";
 
                 outputAFile = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + subjectname1 + "___" + subjectname2 + "-A.txt";
                 outputBFile = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + subjectname1 + "___" + subjectname2 + "-B" + ".txt";
-//                AllResults = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + "Allresults___" + subjectname1.substring(0, subjectname1.indexOf('-')) + ".txt";
                 AllResults = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + "Allresults___" + subjectname1 + ".txt";
 
                 outputAWithCodeFile = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + subjectname1 + "___" + subjectname2 + "-A-withcode.txt";
                 outputBWithCodeFile = output.getAbsolutePath() + File.separator + subjectname1 + File.separator + subjectname1 + "___" + subjectname2 + "-B-withcode" + ".txt";
 
-//                System.out.println(outputAFile);
                 File existFile = new File(outputAFile);
                 if (!existFile.exists()) {
                     // 克隆对信息和源码文件。
@@ -135,13 +126,7 @@ public class FindCPCoChangeClone {
                                 tmp1 = aFileReader.readLine();
                                 continue;
                             }
-//                             以下是更标准的写法，但是先不这样做。
-//                            int hashValue = pcid1.hashCode() ^ pcid2.hashCode();
-//
-//                            if (!set.add(hashValue)) { // 如果添加失败，说明组合重复
-//                                tmp1 = bufferedReader.readLine();
-//                                continue;
-//                            }
+
                             // 是一对新的pcid
                             num++;
                             noDupWriter.write(tmp2 + "\n");

@@ -56,16 +56,17 @@ def get_time(source_name, clone_type, pcid):
         
 def detect(source_name, clone_list, clone_type, write_file):
     count = 0
-    count_in_commit = 0  # 同一个commit的数量
-    count_between_commit = 0  # 不同commmit之间的数量
-    count_test_in_commit = 0  # 同一个commit的测试数量
-    count_test_between_commit = 0  # 不同commit之间的测试数量
+    count_in_commit = 0
+    count_between_commit = 0 
+    count_test_in_commit = 0
+    count_test_between_commit = 0
     for clone_pair in clone_list:
         print("Detect " + source_name + "'s " + str(count) + " clone pair...")
         count += 1
         time_1 = get_time(source_name, clone_type, clone_pair[0]['pcid'])
         time_2 = get_time(source_name, clone_type, clone_pair[1]['pcid'])
         # print(time_1, time_2)
+        # 跳过milo中的大量加载(防止数据污染)
         if "opc-ua-sdk/sdk-server/src/main/java/org/eclipse/milo/opcua/sdk/server/namespaces/loader" in clone_pair[0]['file_path'] or "opc-ua-sdk/sdk-server/src/main/java/org/eclipse/milo/opcua/sdk/server/namespaces/loader" in clone_pair[1]['file_path']:
             continue
         if time_1 and time_2: 

@@ -28,8 +28,8 @@ Enhanced code clone detection tool specifically designed for detecting co-modifi
 
 **Features:**
 
-- Co-modified code clone detection
-- Cross-project co-modified code clone detection
+- Co-modified code clone detection (RQ4)
+- Cross-project co-modified code clone detection (RQ5)
 
 ### 2. AnalysisModule
 
